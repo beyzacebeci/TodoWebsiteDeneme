@@ -1,0 +1,25 @@
+﻿@page
+@model LoginModel
+@{
+     ViewData["Title"] = "Home page";
+}
+
+<h3 class="text-center"><strong>LOGIN</strong> </h3>
+<form method="post">
+      <div class="form">
+        <div class="form-group mb-3">
+          <label for="form-username">Username</label>
+          <input class="form-control" type="text" name="todo" id="form-username" placeholder="Username" asp-for="Username">
+        </div>
+        <div class="form-group">
+          <label for="form-password">Password</label>
+          <input class="form-control" type="password" name="todo" id="form-password" placeholder="Enter your password"  asp-for="Password">
+        </div>
+      </div>
+      <div class="login-btn text-center"><button class="btn btn-primary rounded-pill mt-3 mb-1">Login</button>
+            <div style="font-size: 12px;">Don't have an account yet? <a href="signup.html"><span class="text-danger">Sign up for free</span></a>
+                                                                                          
+        </div>
+      </div>
+</form>
+
