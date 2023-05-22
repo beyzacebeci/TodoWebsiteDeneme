@@ -4,31 +4,36 @@
     ViewData["Title"] = "Home page";
 }
 
-<h3 class="text-center mt-3"><strong>SIGN UP</strong> </h3>
+<h3 class="text-center mt-3"><strong>SIGN UP</strong></h3>
 
-<div class="form">
-    <div class="form-group mb-2">
-        <label for="form-username">Name</label>
-        <input class="form-control" type="text" name="todo" id="form-name" placeholder="Enter your name">
-    </div>
-    <div class="form-group mb-2">
-        <label for="form-password">Surname</label>
-        <input class="form-control" type="text" name="todo" id="form-surname" placeholder="Enter your surname">
-    </div>
 
-    <div class="form-group mb-2">
-        <label for="form-username">Username</label>
-        <input class="form-control" type="text" name="todo" id="form-username" placeholder="Username">
-    </div>
+    <div class="form">
+        <div class="form-group mb-2">
+            <label for="form-name">Name</label>
+            <input class="form-control" type="text" id="form-name" placeholder="Enter your name" asp-for="Name">
+        </div>
 
-    <div class="form-group mb-2">
-        <label for="form-username">New Password</label>
-        <input class="form-control" type="text" name="todo" id="form-password" placeholder="New password">
-    </div>
+        <div class="form-group mb-2">
+            <label for="form-surname">Surname</label>
+            <input class="form-control" type="text" id="form-surname" placeholder="Enter your surname" asp-for="Surname">
+        </div>
 
-    <div class="form-group">
-        <label for="form-username">New Password Again</label>
-        <input class="form-control" type="text" name="todo" id="form-newpassword" placeholder="New password again">
+        <div class="form-group mb-2">
+            <label for="form-username">Username</label>
+            <input class="form-control" type="text" id="form-username" placeholder="Username" asp-for="Username">
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="form-password">New Password</label>
+            <input class="form-control"  id="form-password" placeholder="New password" asp-for="NewPassword">
+        </div>
+
+        <div class="form-group">
+            <label for="form-newpassword">New Password Again</label>
+            <input class="form-control" id="form-newpassword" placeholder="New password again" asp-for="NewPasswordAgain">
+        </div>
+
+        <div class="text-center">
+        <button type="submit" class="btn btn-primary rounded-pill mt-4 mb-3" method="post" asp-page-handler="Register">Sign Up</button>
+        </div>
     </div>
-</div>
-<div class="text-center"><button class="btn btn-primary rounded-pill mt-4 mb-3">Sign Up</button></div>
