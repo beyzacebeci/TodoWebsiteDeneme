@@ -27,7 +27,7 @@ namespace TodoWebsite.Pages
             
             Console.WriteLine(Name);
             Console.WriteLine(Surname);
-            Console.WriteLine(UserName);
+            Console.WriteLine(Username);
             Console.WriteLine(NewPassword);
             Console.WriteLine(NewPasswordAgain);
 
