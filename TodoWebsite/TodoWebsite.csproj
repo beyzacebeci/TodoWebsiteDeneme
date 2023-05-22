@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\todo.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Pages\Shared\static\" />
   </ItemGroup>
 
