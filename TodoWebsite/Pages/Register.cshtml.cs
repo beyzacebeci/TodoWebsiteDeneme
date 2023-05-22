@@ -18,7 +18,6 @@ namespace TodoWebsite.Pages
         [BindProperty]
         public string NewPassword { get; set; }
 
-
         [BindProperty]
         public string NewPasswordAgain { get; set; }
 
