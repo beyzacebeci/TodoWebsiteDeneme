@@ -7,39 +7,17 @@
 <div class="list-main-container">
     <div class="list-wrapper">
         <div class="list-header">
-            <h3 class="header-text"><strong>Yapılacaklar</strong></h3>
+            <h3 class="card-header-text" contenteditable="true"><strong>Yapılacaklar</strong></h3>
         </div>
         <div class="list-cards-wrapper" id="list-id-1">
-            <div class="list-card">
-                <a>
-                    <label class="checkbox-label">
-                        <input type="checkbox">
-                        <svg viewBox="0 0 64 64" >
-                            <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"></path>
-                        </svg>
-                    </label>
-                    <span class="cardText">1. kart</span>
-                </a>
-            </div>
-            <div class="list-card">
-                <a>
-                    <label class="checkbox-label">
-                        <input type="checkbox">
-                        <svg viewBox="0 0 64 64">
-                            <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"></path>
-                        </svg>
-                    </label>
-                    <span class="cardText">2. kart</span>
-                </a>
-            </div>
+            
         </div>
-        <div class="list-card-composer">
-            <a class="open-card-composer" onclick="addCard('list-id-1')">+ Kart Ekle</a>
+        <div class="add-card-composer" onclick="addCard('list-id-1')">
+            <i class="fa fa-plus"></i> Kart Ekle
         </div>
     </div>
-    <div class="list-add-wrapper">
-        <div class="list-add-composer">
-            <a class="open-list-composer" onclick="addList()"><i class="fa fa-plus meraba"></i> Liste Ekle</a>
+    <div class="list-add-wrapper" onclick="addList()">
+        <div class="list-add-composer"><i class="fa fa-plus"></i> Liste Ekle
         </div>
     </div>
     
@@ -51,28 +29,20 @@
         $('.list-add-wrapper').before(
             '<div class="list-wrapper">' +
             '<div class= "list-header"> ' +
-            '<h3 class="header-text"> <strong>Yapılacaklar </strong></h3> ' +
+            '<h3 class="card-header-text" contenteditable="true"> <strong>Yeni Liste</strong></h3> ' +
             '</div><div class= "list-cards-wrapper"  id="list-id-' + $('.list-main-container').children().length + '" > ' +
-            '<div class="list-card"><a>'+
-            '<a><label class="checkbox-label" ><input type="checkbox"><svg viewBox="0 0 64 64">'+
-            '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>'+
-            '</svg></label><span class= "cardText" > 1. kart </span></a></a></div>' +
-            '<div class="list-card"><a>' +
-            '<a><label class="checkbox-label" ><input type="checkbox"><svg viewBox="0 0 64 64">' +
-            '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>' +
-            '</svg></label><span class= "cardText" > 1. kart </span></a></a></div>' +
             '</div>' +
-            '<div class= "list-card-composer"> ' +
-            '<a class="open-card-composer" onclick="addCard(\'list-id-'+ $('.list-main-container').children().length + '\')"> + Kart Ekle </a>' +
+            '<div class= "add-card-composer" onclick="addCard(\'list-id-' + $('.list-main-container').children().length + '\')"> ' +
+            ' <i class="fa fa-plus"></i>  Kart Ekle' +
             '</div>' +
             '</div>');
     }
     function addCard(elementId) {
         var elementOfClicked = $('#' + elementId);
-        var newCard = '<div class="list-card"><a>' +
+        var newCard = '<div class="list-card">' +
             '<a><label class="checkbox-label" ><input type="checkbox"><svg viewBox="0 0 64 64">' +
             '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>' +
-            '</svg></label><span class= "cardText" > ' + (elementOfClicked.children().length + 1) + '. kart </span></a></a></div>';
+            '</svg></label><span class= "cardText" contenteditable="true" >' + (elementOfClicked.children().length + 1) + '. kart </span></a></a></div>';
         elementOfClicked.append(newCard);
 
     }
