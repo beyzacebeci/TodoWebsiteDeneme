@@ -37,12 +37,11 @@
                 <div class="sidebar-control-button">
                     <div class="shadow-outline"></div>
                     <button type="button" id="sidebarHover"></button>
-                    <button type="button" id="sidebarControl"> < </button>
+                    <button type="button" id="sidebarControl"> <i class="icon-sidebar fa fa-close"></i> </button>
                 </div>
             </div>
             
             <div class="content-container">
-                <p>merabdadadafsgas daaaaaaaaaaaaaaaaaaaa</p>
                 @RenderBody()
             </div>
         </section>
@@ -54,11 +53,15 @@
     $(document).ready(function () {
         var trigger = $('#sidebarControl'),
             sidebarContainer = $('.sidebar-part1'),
+            contentContainer= $('.content-container'),
+            iconSidebar= $('.icon-sidebar'),
             isClosed = true;
+        contentContainer.css('padding-left', '260px');
 
         trigger.click(function () {
             SideBarOpenClose();
         });
+
 
         function SideBarOpenClose() {
 
@@ -66,15 +69,19 @@
                 sidebarContainer.hide();
                 trigger.removeClass('is-open');
                 trigger.addClass('is-closed');
+                iconSidebar.removeClass('fa-close');
+                iconSidebar.addClass('fa-bars');
+                contentContainer.css('padding-left','40px');
                 isClosed = false;
             } else {
                 sidebarContainer.show();
                 trigger.removeClass('is-closed');
                 trigger.addClass('is-open');
+                iconSidebar.removeClass('fa-bars');
+                iconSidebar.addClass('fa-close');
+                contentContainer.css('padding-left', '260px');
                 isClosed = true;
             }
         }
-
-        
     });
 </script>

@@ -62,7 +62,6 @@
 }
 
 .sidebar-part1 {
-    min-height: 100vh;
     width: 220px;
     background-color: #1a1a1a;
 }
@@ -76,6 +75,7 @@
 
 .navbar {
     padding: 0;
+    z-index:1;
 }
 
 .sidebar-nav {
@@ -256,16 +256,154 @@ a[href*="#followme"]::before {
     margin: 0px -5px 0px 0px;
     display:flex;
 }
+
 .shadow-outline {
     width: 3px;
-    min-height: 100vh;
     background: var(--ds-border, linear-gradient(to left, rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0.2) 1px, rgba(0, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0) 100% ));
 }
+
 #sidebarControl{
     position:absolute;
 }
+
 #sidebarHover {
     width: 24px;
     background-color: transparent;
     border: 0px;
 }
+
+.list-cards{
+    display:flex;
+    flex-direction:column;
+}
+
+.list-card {
+    background-color: #22272b;
+    border-radius: 10px;
+    padding:10px;
+    margin-top:10px;
+}
+
+.list-card-composer{
+    margin-top:10px;
+}
+
+.list-wrapper {
+    width: 272px;
+    height: 100%;
+    color: white;
+    background-color: #101204;
+    padding: 20px;
+    border-radius: 20px;
+    margin-right:30px;
+}
+
+.list-main-container{
+    display:flex;
+}
+
+.list-wrapper a,.list-add-wrapper a {
+    color: white;
+    text-decoration: none;
+}
+
+.list-add-wrapper {
+    width: 272px;
+    height: 100%;
+    color: white;
+    background-color: #11abd1;
+    padding: 20px;
+    border-radius: 20px;
+    margin-right: 30px;
+}
+
+.list-add-wrapper:hover {
+    background-color: #0f8ba9;
+}
+
+
+.checkbox-label {
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    display: none;
+}
+
+.checkbox-label svg {
+    overflow: visible;
+    height:1em;
+    width:1em;
+}
+
+.path {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    stroke-dasharray: 241 9999999;
+    stroke-dashoffset: 0;
+}
+
+.checkbox-label input:checked ~ svg .path {
+    stroke-dasharray: 70.5096664428711 9999999;
+    stroke-dashoffset: -262.2723388671875;
+}
+
+.cardText{
+    padding-left:5px;
+}
+
+.notepad {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 0 0 10px 10px;
+}
+
+.top {
+    width: 100%;
+    height: 50px;
+    background: #33842d;
+    border-radius: 5px 5px 0 0;
+    font-family: "Shadows Into Light", cursive;
+    color: #fff;
+    text-align: center;
+    font-size: 1.85em;
+    border-bottom: 3px solid #000;
+}
+
+.paper {
+    width: 100%;
+    height: 60vh;
+    padding: 35px 20px;
+    background: repeating-linear-gradient(#d7f1dd, #e6f6fd 31px, #7ab9cc 31px, #91c0c7 32px);
+    font-family: "Shadows Into Light", cursive;
+    line-height: 32px;
+    outline: 0;
+    font-size: 22px;
+    overflow-y: scroll;
+    background-attachment: local;
+    background-repeat: no-repeat;
+}
+
+.paper::-webkit-scrollbar {
+    width: 0px;
+    background-color: transparent;
+}
+
+.notes-container{
+    margin:90px 0px 0px 0px;
+    width:100%;
+}
+
+.notes-wrapper {
+    display: flex;
+    width:100%;
+}
+
+.content-container{
+    width:100%;
+}
+
