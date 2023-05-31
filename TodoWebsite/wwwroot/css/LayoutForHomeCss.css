@@ -376,7 +376,7 @@ a[href*="#followme"]::before {
 }
 
 .notepad {
-    min-width: 40vh;
+    min-width: 45vh;
     max-width: 45vh;
     border-radius: 0 0 10px 10px;
     background-color: #f6e58d;
@@ -401,7 +401,7 @@ a[href*="#followme"]::before {
     width: 100%;
     height: 40vh;
     padding: 20px 20px;
-    background: repeating-linear-gradient(#f6e58d, #f6e58d 31px, #7ab9cc 31px, #91c0c7 32px);
+    background: repeating-linear-gradient(#f6e58d, #f6e58d 38px, #7ab9cc 40px, #91c0c7 32px);
     /* background-size: 100% calc(60vh - 40px); kağıdın boyutunu 40 piksel azaltır */
     background-position: 20px 20px; /* arka planı 20 piksel sağa kaydırır */
     background-size: 93%;
@@ -419,10 +419,13 @@ a[href*="#followme"]::before {
     background-color: transparent;
 }
 
-.notes-container{
-    margin:90px 0px 0px 0px;
-    width:100%;
-    display:flex;
+.notes-container {
+    margin: 90px 0px 0px 0px;
+    width: 100%;
+    display: flex;
+    overflow-y: scroll;
+    max-height: 90vh;
+    flex-wrap: nowrap;
 }
 
 .notes-wrapper {
@@ -432,9 +435,7 @@ a[href*="#followme"]::before {
 }
 
 .content-container {
-    max-height:90vh;
-    flex-wrap: nowrap;
-    overflow-y: scroll;
+    width:100%;
 }
 
 .notepad-item{
