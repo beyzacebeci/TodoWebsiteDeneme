@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TodoWebsite.Controller;
 
 namespace TodoWebsite.Pages
 {
@@ -17,7 +18,8 @@ namespace TodoWebsite.Pages
             Console.WriteLine("test");
             Console.WriteLine(Username);
             Console.WriteLine(Password);
-            
+            AuthController authController = new AuthController();
+            authController.Register();
         }
     } 
 }

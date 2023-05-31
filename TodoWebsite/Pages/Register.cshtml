@@ -1,39 +1,41 @@
 ﻿@page
-@model RegisterModel
+@model TodoWebsite.Pages.RegisterModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <h3 class="text-center mt-3"><strong>SIGN UP</strong></h3>
 
-
+<form method="post">
     <div class="form">
         <div class="form-group mb-2">
             <label for="form-name">Name</label>
-            <input class="form-control" type="text" id="form-name" placeholder="Enter your name" asp-for="Name">
+            <input class="form-control"  id="form-name" asp-for="Name">
         </div>
 
         <div class="form-group mb-2">
             <label for="form-surname">Surname</label>
-            <input class="form-control" type="text" id="form-surname" placeholder="Enter your surname" asp-for="Surname">
+            <input class="form-control" id="form-surname" asp-for="Surname">
         </div>
 
         <div class="form-group mb-2">
             <label for="form-username">Username</label>
-            <input class="form-control" type="text" id="form-username" placeholder="Username" asp-for="Username">
+            <input class="form-control" type="text" id="form-username" asp-for="Username">
         </div>
 
         <div class="form-group mb-2">
             <label for="form-password">New Password</label>
-            <input class="form-control"  id="form-password" placeholder="New password" asp-for="NewPassword">
+            <input class="form-control"  id="form-password"  asp-for="NewPassword">
         </div>
 
         <div class="form-group">
             <label for="form-newpassword">New Password Again</label>
-            <input class="form-control" id="form-newpassword" placeholder="New password again" asp-for="NewPasswordAgain">
+            <input class="form-control" id="form-newpassword" asp-for="NewPasswordAgain">
         </div>
 
-        <div class="text-center">
-        <button type="submit" class="btn btn-primary rounded-pill mt-4 mb-3" method="post" asp-page-handler="Register">Sign Up</button>
+	<div class="text-center" >
+		<button type="submit" class="btn btn-primary rounded-pill mt-4 mb-3">Sign Up</button>
         </div>
     </div>
+
+  </form>

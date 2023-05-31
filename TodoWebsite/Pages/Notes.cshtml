@@ -1,0 +1,37 @@
+﻿@page
+@model TodoWebsite.Pages.NotesModel
+@{
+    Layout = "_LayoutForHome";
+}
+
+<div class="notes-container">
+    <div class="notes-wrapper">
+        <div class="notepad notepad-item">
+            <div class="top" contenteditable="true">Note 1</div>
+            <div class="paper" contenteditable="true">
+                Hello world !!! This is my Personal Notebook
+            </div>
+            <button class="saveNote">
+                Kaydet
+            </button>
+        </div>
+        <div class="notes-add-wrapper notepad-item" onclick="addNote()">
+            <div class="notes-add-composer open-note-button" >
+                <i class="fa fa-plus"></i> Not Ekle
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function addNote() {
+        $('.notes-add-wrapper').before(
+            '<div class="notepad notepad-item" >'+
+            '<div class="top" contenteditable = "true" > Note 1 </div>'+
+            '<div class= "paper" contenteditable = "true" > '+
+            'Hello world!!! This is my Personal Notebook'+
+            '</div>'+
+            '</div>');
+    }
+</script>

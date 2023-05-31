@@ -23,7 +23,7 @@ namespace TodoWebsite.Pages
 
         public void OnPost()
         {
-            
+            Console.WriteLine("fsgggggtgt");
             Console.WriteLine(Name);
             Console.WriteLine(Surname);
             Console.WriteLine(Username);
