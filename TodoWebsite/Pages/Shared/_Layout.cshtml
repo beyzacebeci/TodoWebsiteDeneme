@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/AuthLayout.css" asp-append-version="true" />
     
 </head>
-<body>
+<body onload="loadCookieCheck()">
   
     <div class="container">
 
@@ -34,5 +34,13 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+<script>
+        function loadCookieCheck(){
+            console.log("test");
+            let x = document.cookie
+            console.log(x);
+        }
+</script>
 </body>
+
 </html>

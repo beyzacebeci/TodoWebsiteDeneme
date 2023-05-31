@@ -32,7 +32,9 @@
             <label for="form-newpassword">New Password Again</label>
             <input class="form-control" id="form-newpassword" asp-for="NewPasswordAgain">
         </div>
-
+        <label>@Model.ErrorPassword</label>
+        <label>@Model.ErrorMessage</label>
+        
 	<div class="text-center" >
 		<button type="submit" class="btn btn-primary rounded-pill mt-4 mb-3">Sign Up</button>
         </div>

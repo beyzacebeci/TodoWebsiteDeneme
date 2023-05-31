@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Reflection.Metadata;
+using System.Security.Claims;
 using TodoWebsite.Controller;
+using TodoWebsite.Models.ResultModels;
 
 namespace TodoWebsite.Pages
 {
@@ -12,14 +16,26 @@ namespace TodoWebsite.Pages
 
         [BindProperty]
         public string Password { get; set; }
-        
-        public void OnPost()
+        [BindProperty]
+        public string ErrorMessage { get; set; }=String.Empty;
+
+        public IActionResult OnPost()
         {
-            Console.WriteLine("test");
-            Console.WriteLine(Username);
-            Console.WriteLine(Password);
             AuthController authController = new AuthController();
-            authController.Register();
+            if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
+            {
+                ErrorMessage = "Lütfen tüm alanlarý doldurunuz";
+
+            }
+            ResultModel resultModel = authController.Login(Username, Password);
+            ErrorMessage = resultModel.message;
+
+            if (resultModel.success)
+            {
+                return RedirectToPage("home");
+            }
+            return null;
+
         }
     } 
 }
