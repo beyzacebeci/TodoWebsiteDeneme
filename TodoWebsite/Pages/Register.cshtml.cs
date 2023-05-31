@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using TodoWebsite.Controller;
+using TodoWebsite.Models.ResultModels;
 
 namespace TodoWebsite.Pages
 {
@@ -21,16 +23,35 @@ namespace TodoWebsite.Pages
         [BindProperty]
         public string NewPasswordAgain { get; set; }
 
-        public void OnPost()
-        {
-            Console.WriteLine("fsgggggtgt");
-            Console.WriteLine(Name);
-            Console.WriteLine(Surname);
-            Console.WriteLine(Username);
-            Console.WriteLine(NewPassword);
-            Console.WriteLine(NewPasswordAgain);
+        public string ErrorMessage { get; set; } = String.Empty;
+        public string ErrorPassword { get; set; } = String.Empty;
 
-       
+        public IActionResult OnPost()
+        {
+            AuthController authController = new AuthController();
+            if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Surname) || String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(NewPassword) || String.IsNullOrEmpty(NewPasswordAgain))
+            {
+
+                ErrorMessage = "Lütfen tüm alanları doldurunuz";
+                return null;
+
+            }
+            if (NewPassword.ToString()!=NewPasswordAgain.ToString())
+            {
+                ErrorPassword = "Girilen iki şifre aynı değil";
+                return null;
+            }
+
+            ResultModel resultModel = authController.Register(Name, Surname,Username, NewPassword);
+            ErrorMessage = resultModel.message;
+
+            if (resultModel.success)
+            {
+                return RedirectToPage("home");
+            }
+            return null;
+
+
         }
     }
 }
