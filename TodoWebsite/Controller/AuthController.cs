@@ -1,21 +1,16 @@
-﻿using System.IO;
-using System;
-using TodoWebsite.Models;
-using RestSharp;
-using TodoWebsite.Pages;
-using TodoWebsite.Models.ResultModels;
+﻿using RestSharp;
 using System.Text.Json;
-using System.Net;
+using TodoWebsite.Models.ResultModels;
 
 namespace TodoWebsite.Controller
 {
     public class AuthController
     {
         private static readonly HttpClient _httpClient = new HttpClient();
-        public ResultModel Register(string Name, string Surname,string Username, string NewPassword)
+        public ResultModel Register(string Name, string Surname, string Username, string NewPassword)
         {
 
-             
+
             var client = new RestClient("https://webtodoapi.azurewebsites.net/api/Auth/register");
             var request = new RestRequest();
             request.AddHeader("Accept", "application/json");
@@ -27,32 +22,26 @@ namespace TodoWebsite.Controller
                 surname = Surname,
                 username = Username,
                 password = NewPassword
-            }) ;
-     
-           
+            });
+
+
             var response = client.Post(request);
             var content = response.Content; // Raw content as string
             ResultModel result = JsonSerializer.Deserialize<ResultModel>(content);
             return result;
-         //   var response2 = client.Post<Object>(request);
-            
+            //   var response2 = client.Post<Object>(request);
+
 
 
         }
-        public ResultModel Login(string Username, string Password)
+        public ResultWithCookie Login(IHttpContextAccessor accessor, string Username, string Password)
         {
-            var client = new RestClient("https://webtodoapi.azurewebsites.net/api/Auth/login");
-            var request = new RestRequest();
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("Content-Type", "application/json");
-            request.AddBody(new
+
+            var result = HTTPRequestHandler<ResultWithCookie>.Post(accessor, "https://webtodoapi.azurewebsites.net/api/Auth/login", new
             {
                 username = Username,
                 password = Password
             });
-            var response = client.Post(request);
-            var content = response.Content;
-            ResultModel result = JsonSerializer.Deserialize<ResultModel>(content);
             return result;
 
         }

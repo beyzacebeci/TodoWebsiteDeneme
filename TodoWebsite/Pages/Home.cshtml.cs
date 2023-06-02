@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TodoWebsite.Controller;
@@ -11,11 +7,34 @@ namespace TodoWebsite.Pages.Shared
 {
     public class HomeModel : PageModel
     {
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public HomeModel(IHttpContextAccessor _httpContextAccessor)
+        {
+            this._httpContextAccessor = _httpContextAccessor;
+
+        }
         public IActionResult OnGet()
         {
-            ListController listController = new ListController();
-            DataResultModel dataresultModel = listController.GetAllList();
-           
+            string auth;
+
+            bool check = true;
+
+            var result = _httpContextAccessor.HttpContext.Request.Cookies;
+            foreach (var cookie in result.Keys)
+            {
+                if (cookie == ".AspNetCore.cookie")
+                {
+                    check = false;
+                }
+            }
+
+            if (check)
+            {
+                return Redirect("/login");
+            }
+
             return null;
 
         }
