@@ -13,11 +13,6 @@ namespace TodoWebsite.Pages.Shared
 
 
 
-            //if (check)
-            //{
-            //    _httpContextAccessor.HttpContext.Response.Redirect("/login");
-            //}
-            //var authenticate = result.TryGetValue(ClaimTypes.NameIdentifier, out auth);
 
         }
         public IActionResult OnGet()
