@@ -9,7 +9,10 @@ namespace TodoWebsite.Pages.Shared
     {
 
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        [BindProperty]
+        public DataResultModel UserTodoresult { get; set; }
+        [BindProperty]
+        public string id { get; set; }
         public HomeModel(IHttpContextAccessor _httpContextAccessor)
         {
             this._httpContextAccessor = _httpContextAccessor;
@@ -33,6 +36,13 @@ namespace TodoWebsite.Pages.Shared
             if (check)
             {
                 return Redirect("/login");
+            }
+            else
+            {
+                ListController listController = new ListController();
+
+                DataResultModel UserTodoresult = listController.GetAllList(_httpContextAccessor);
+                this.id = UserTodoresult.data.id;
             }
 
             return null;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 using TodoWebsite.Controller;
 using TodoWebsite.Models.ResultModels;
 
@@ -8,6 +7,12 @@ namespace TodoWebsite.Pages
 {
     public class RegisterModel : PageModel
     {
+        private readonly IHttpContextAccessor _accessor;
+
+        public RegisterModel(IHttpContextAccessor accessor)
+        {
+            _accessor = accessor;
+        }
         [BindProperty]
         public string Name { get; set; }
 
@@ -36,13 +41,13 @@ namespace TodoWebsite.Pages
                 return null;
 
             }
-            if (NewPassword.ToString()!=NewPasswordAgain.ToString())
+            if (NewPassword.ToString() != NewPasswordAgain.ToString())
             {
                 ErrorPassword = "Girilen iki şifre aynı değil";
                 return null;
             }
 
-            ResultModel resultModel = authController.Register(Name, Surname,Username, NewPassword);
+            ResultWithCookie resultModel = authController.Register(_accessor, Name, Surname, Username, NewPassword);
             ErrorMessage = resultModel.message;
 
             if (resultModel.success)
@@ -55,5 +60,5 @@ namespace TodoWebsite.Pages
         }
 
 
-	}
+    }
 }

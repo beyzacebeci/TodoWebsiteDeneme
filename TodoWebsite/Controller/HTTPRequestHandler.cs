@@ -18,7 +18,7 @@ namespace TodoWebsite.Controller
             {
                 request.AddHeader("Cookie", ".AspNetCore.cookie=" + authCookie);
             }
-            var response = client.Post(request);
+            var response = client.Get(request);
 
             var content = response.Content;
 
