@@ -1,5 +1,6 @@
 ﻿@page
 @model TodoWebsite.Pages.RegisterModel
+
 @{
     ViewData["Title"] = "Home page";
 }
@@ -31,12 +32,17 @@
         <div class="form-group">
             <label for="form-newpassword">New Password Again</label>
             <input class="form-control" id="form-newpassword" asp-for="NewPasswordAgain">
-        </div>
-        <label>@Model.ErrorPassword</label>
-        <label>@Model.ErrorMessage</label>
         
-	<div class="text-center" >
-		<button type="submit" class="btn btn-primary rounded-pill mt-4 mb-3">Sign Up</button>
+        </div>
+        <div class="text-center">
+			<label class="text-danger">@Model.ErrorPassword</label>
+			<label class="text-danger">@Model.ErrorMessage</label>
+		</div>
+        
+        
+	<div class="text-center mb-3" >
+		<button type="submit" class="btn btn-primary rounded-pill mt-4">Sign Up</button>
+            <div>Do you have a account? <a href="/Login"><span class="text-danger">Login</span></a>  </div>
         </div>
     </div>
 
