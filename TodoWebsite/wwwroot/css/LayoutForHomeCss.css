@@ -473,8 +473,8 @@ a[href*="#followme"]::before {
 .todo-open-card-wrapper {
     margin: 5vh auto;
     background-color: #323940;
-    min-height: 90%;
-    width: 60%;
+    min-height: 70%;
+    width: 40%;
     border-radius: 20px;
 }
 
