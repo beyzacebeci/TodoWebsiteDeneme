@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/LayoutForHomeCss.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <body>
     @Html.Partial("LayoutPartials/_header")
@@ -48,7 +48,7 @@
     </main>
 </body>
 </html>
-
+@RenderSection("InlineScripts", false)
 <script type="text/javascript">
     $(document).ready(function () {
         var trigger = $('#sidebarControl'),
