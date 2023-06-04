@@ -27,7 +27,7 @@ namespace TodoWebsite.Pages
             AuthController authController = new AuthController();
             if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
             {
-                ErrorMessage = "Lütfen tüm alanlarý doldurunuz";
+                ErrorMessage = "Please fill in all fields";
 
             }
             ResultWithCookie resultModel = authController.Login(_accessor, Username, Password);

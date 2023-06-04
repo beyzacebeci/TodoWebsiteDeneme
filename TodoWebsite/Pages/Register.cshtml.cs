@@ -37,13 +37,13 @@ namespace TodoWebsite.Pages
             if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Surname) || String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(NewPassword) || String.IsNullOrEmpty(NewPasswordAgain))
             {
 
-                ErrorMessage = "Lütfen tüm alanları doldurunuz";
+                ErrorMessage = "Please fill in all fields";
                 return null;
 
             }
             if (NewPassword.ToString() != NewPasswordAgain.ToString())
             {
-                ErrorPassword = "Girilen iki şifre aynı değil";
+                ErrorPassword = "The two passwords do not match";
                 return null;
             }
 
