@@ -42,7 +42,9 @@ namespace TodoWebsite.Pages.Shared
             {
                 ListController listController = new ListController();
 
+
                 DataResultModel<List<ListeEntity>> UserTodoresult = listController.GetAllList(_httpContextAccessor);
+
             }
 
             return null;

@@ -310,6 +310,7 @@ a[href*="#followme"]::before {
 }
 .lists-wrapper-container {
     display: flex;
+    padding:5vh;
 }
 
 .list-main-container{
@@ -372,11 +373,11 @@ a[href*="#followme"]::before {
     stroke-dashoffset: -262.2723388671875;
 }
 
-.cardText{
+.card-text{
     margin-left:10px;
     outline-offset:0px;
 }
-.cardText:focus{
+.card-text:focus{
     outline:none;
 }
 
@@ -490,4 +491,3 @@ a[href*="#followme"]::before {
 .open-card-description{
     padding-top:10vh;
 }
-

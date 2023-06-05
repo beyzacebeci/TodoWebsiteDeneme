@@ -2,6 +2,7 @@
 @model TodoWebsite.Pages.Shared.HomeModel
 @{
     Layout = "_LayoutForHome";
+    var dataResult = Model.UserTodoresult.data.liste??null;
 }
 
 
@@ -9,7 +10,7 @@
     <div class="todo-open-card-wrapper">
         <div class="open-card-content">
             <div class="open-card-header">
-                <h2 class="open-card-header-text"><strong>Merhaba</strong></h2>
+                <h2 class="open-card-header-text"><strong></strong></h2>
             </div>
             <div class="open-card-description">
                 <div class="description-header">
@@ -17,7 +18,7 @@
                         <strong>Açıklama</strong>
                     </h5>
                 </div>
-                <p>fasdfasdfasd fasd fsadf asdf asdf asdf sadf asdf asdf asdf sd</p>
+                <p class="open-card-description-text"></p>
 
             </div>
         </div>
@@ -25,9 +26,58 @@
 </div>
 <div class="list-main-container" ondragover="allowDrop(event)" ondrop="dropCard(event)">
     <div class="lists-wrapper-container" >
-        
+        @if(dataResult!=null)
+        {
+            @foreach(var listItem in dataResult)
+            {
+                <div class="list-wrapper">                   
+                    <div class="list-header">
+                        <h3 class="card-header-text" contenteditable="true"> <strong>@listItem.listName</strong></h3>                        
+                    </div>
+                    <div class="list-cards-wrapper" id="@listItem.listId">
+                        @foreach (var cardItem in listItem.todos)
+                        {
+                            <div id=" @cardItem.id " class="list-card" draggable="true" ondragend="dropCardSelf(event,'@cardItem.id')" onclick="overlayOn('@cardItem.topic','@cardItem.description')" ondragstart="dragCard(event)">
+                                <a>
+                                    @if (cardItem.isChecked)
+                                    {
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" checked>
+                                            <svg viewBox="0 0 64 64">
+                                                <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"> </path>' +
+                                            </svg>
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="checkbox-label">
+                                            <input type="checkbox">
+                                            <svg viewBox="0 0 64 64">
+                                                <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"> </path>' +
+                                            </svg>
+                                        </label>
+                                    }
+                                    
+                                    <span class="card-text">
+                                        @cardItem.topic
+                                    </span>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                    <div class="add-card-composer" onclick="addCard('@listItem.listId')">
+                         <i class="fa fa-plus"></i>  Kart Ekle   
+                    </div> 
+                </div>
+
+
+
+
+                
+            }
+        }
         <div class="list-add-wrapper" onclick="addList()" >
-            <div class="list-add-composer"><i class="fa fa-plus"></i> Liste Ekle @Model.id
+            <div class="list-add-composer"><i class="fa fa-plus"></i> Liste Ekle
             </div>
         </div>
     </div>
