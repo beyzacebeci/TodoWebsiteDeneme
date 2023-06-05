@@ -1,9 +1,11 @@
+using TodoWebsite.Controller;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
+builder.Services.AddSingleton<NoteController, NoteController>();
 // start page 
 builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
