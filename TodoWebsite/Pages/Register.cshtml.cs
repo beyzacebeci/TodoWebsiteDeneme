@@ -41,6 +41,11 @@ namespace TodoWebsite.Pages
                 return null;
 
             }
+            if (NewPassword.Length<8)
+            {
+                ErrorMessage = "Password must be greather than 8 characters ";
+
+            }
             if (NewPassword.ToString() != NewPasswordAgain.ToString())
             {
                 ErrorPassword = "The two passwords do not match";
