@@ -24,6 +24,7 @@ namespace TodoWebsite.Pages.Shared
         {
             string auth;
 
+
             bool check = true;
 
             var result = _httpContextAccessor.HttpContext.Request.Cookies;
