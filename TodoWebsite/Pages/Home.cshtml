@@ -2,7 +2,7 @@
 @model TodoWebsite.Pages.Shared.HomeModel
 @{
     Layout = "_LayoutForHome";
-    var dataResult = Model.UserTodoresult.data.liste??null;
+    var dataResult = Model.UserTodoresult == null ? null : Model.UserTodoresult.data;
 }
 
 

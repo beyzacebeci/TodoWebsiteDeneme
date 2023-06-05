@@ -22,6 +22,24 @@ namespace TodoWebsite.Pages
         {
             _accessor = accessor;
         }
+        public IActionResult OnGet()
+        {
+            bool check = false;
+            var cookieCheck = _accessor.HttpContext.Request.Cookies;
+            foreach (var cookie in cookieCheck.Keys)
+            {
+                if (cookie == ".AspNetCore.cookie")
+                {
+                    check = true;
+                    break;
+                }
+            }
+            if (check)
+            {
+                return Redirect("/home");
+            }
+            return null;
+        }
         public IActionResult OnPost()
         {
             AuthController authController = new AuthController();

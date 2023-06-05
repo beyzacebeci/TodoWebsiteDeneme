@@ -11,12 +11,13 @@ namespace TodoWebsite.Pages.Shared
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         [BindProperty]
-        public DataResultModel<List<ListeEntity>> UserTodoresult { get; set; }
+        public DataResultModel<List<ListeEntity>> UserTodoresult { get; set; } = default;
         [BindProperty]
         public string id { get; set; }
         public HomeModel(IHttpContextAccessor _httpContextAccessor)
         {
             this._httpContextAccessor = _httpContextAccessor;
+
 
         }
         public IActionResult OnGet()
@@ -31,6 +32,7 @@ namespace TodoWebsite.Pages.Shared
                 if (cookie == ".AspNetCore.cookie")
                 {
                     check = false;
+                    break;
                 }
             }
 
@@ -43,7 +45,7 @@ namespace TodoWebsite.Pages.Shared
                 ListController listController = new ListController();
 
 
-                DataResultModel<List<ListeEntity>> UserTodoresult = listController.GetAllList(_httpContextAccessor);
+                this.UserTodoresult = listController.GetAllList(_httpContextAccessor);
 
             }
 
