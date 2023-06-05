@@ -15,33 +15,7 @@
     @Html.Partial("LayoutPartials/_header")
     <main>
         <section class="main-section">
-            <!--
-            <div class="sidebar-container">
-                <div class="sidebar-part1">
-                    <nav class="navbar" role="navigation">
-                        <ul class="nav sidebar-nav">
-                            <div class="sidebar-header">
-                                <div class="sidebar-brand">
-                                    <a href="#">Brand</a>
-                                </div>
-                            </div>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#events">Events</a></li>
-                            <li><a href="#team">Team</a></li>
-                            <li><a href="#services">Services</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li><a href="#followme">Follow me</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="sidebar-control-button">
-                    <div class="shadow-outline"></div>
-                    <button type="button" id="sidebarHover"></button>
-                    <button type="button" id="sidebarControl"> <i class="icon-sidebar fa fa-close"></i> </button>
-                </div>
-            </div>-->
-            
+       
             <div class="content-container">
                 @RenderBody()
             </div>
@@ -50,40 +24,3 @@
 </body>
 </html>
 @RenderSection("InlineScripts", false)
-<!--
-<script type="text/javascript">
-    $(document).ready(function () {
-        var trigger = $('#sidebarControl'),
-            sidebarContainer = $('.sidebar-part1'),
-            contentContainer= $('.content-container'),
-            iconSidebar= $('.icon-sidebar'),
-            isClosed = true;
-        contentContainer.css('padding-left', '260px');
-
-        trigger.click(function () {
-            SideBarOpenClose();
-        });
-
-
-        function SideBarOpenClose() {
-
-            if (isClosed) {
-                sidebarContainer.hide();
-                trigger.removeClass('is-open');
-                trigger.addClass('is-closed');
-                iconSidebar.removeClass('fa-close');
-                iconSidebar.addClass('fa-bars');
-                contentContainer.css('padding-left','40px');
-                isClosed = false;
-            } else {
-                sidebarContainer.show();
-                trigger.removeClass('is-closed');
-                trigger.addClass('is-open');
-                iconSidebar.removeClass('fa-bars');
-                iconSidebar.addClass('fa-close');
-                contentContainer.css('padding-left', '260px');
-                isClosed = true;
-            }
-        }
-    });
-</script>-->
