@@ -28,6 +28,7 @@ namespace TodoWebsite.Pages
             if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
             {
                 ErrorMessage = "Please fill in all fields";
+                return null;
 
             }
             ResultWithCookie resultModel = authController.Login(_accessor, Username, Password);
