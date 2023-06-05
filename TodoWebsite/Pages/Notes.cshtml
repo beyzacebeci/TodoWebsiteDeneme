@@ -2,11 +2,12 @@
 @model TodoWebsite.Pages.NotesModel
 @{
     Layout = "_LayoutForHome";
+    var UserNotes = Model.UserNotes;
 }
 
 <div class="notes-container">
     <div class="notes-wrapper">
-        <div class="notepad notepad-item">
+@*        <div class="notepad notepad-item">
             <form method="post">
 
             <input class="top" contenteditable="true" asp-for="Notes"/>
@@ -19,7 +20,27 @@
             </form>
             
 
-        </div>
+        </div>*@
+        @if (UserNotes != null)
+        {
+            foreach(var note in UserNotes)
+            {
+                      <div class="notepad notepad-item">
+
+                <form method="post">
+                    <label id="id" >@note.id</label>
+                    <input class="top" contenteditable="true" asp-for="Notes" value=@note.topic />
+                    @*<input class="paper" contenteditable="true" asp-for="Content" value=@note.content  > *@
+                    <textarea class="paper">@note.content
+                    </textarea>
+                    <button type="submit" class="saveNote">
+                        Kaydet
+                    </button>
+                </form>
+                </div>
+
+            }
+        }
         <div class="notes-add-wrapper notepad-item" onclick="addNote()">
             <div class="notes-add-composer open-note-button" >
                 <i class="fa fa-plus"></i> Not Ekle
