@@ -42,7 +42,8 @@ namespace TodoWebsite.Pages.Shared
                 ListController listController = new ListController();
 
                 DataResultModel UserTodoresult = listController.GetAllList(_httpContextAccessor);
-                this.id = UserTodoresult.data.id;
+                this.UserTodoresult = UserTodoresult;
+               
             }
 
             return null;

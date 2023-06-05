@@ -15,6 +15,7 @@
     @Html.Partial("LayoutPartials/_header")
     <main>
         <section class="main-section">
+            <!--
             <div class="sidebar-container">
                 <div class="sidebar-part1">
                     <nav class="navbar" role="navigation">
@@ -39,7 +40,7 @@
                     <button type="button" id="sidebarHover"></button>
                     <button type="button" id="sidebarControl"> <i class="icon-sidebar fa fa-close"></i> </button>
                 </div>
-            </div>
+            </div>-->
             
             <div class="content-container">
                 @RenderBody()
@@ -49,6 +50,7 @@
 </body>
 </html>
 @RenderSection("InlineScripts", false)
+<!--
 <script type="text/javascript">
     $(document).ready(function () {
         var trigger = $('#sidebarControl'),
@@ -84,4 +86,4 @@
             }
         }
     });
-</script>
+</script>-->
