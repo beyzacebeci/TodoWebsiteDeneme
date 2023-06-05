@@ -7,15 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Shared\static\**" />
     <Compile Remove="Services\**" />
+    <Content Remove="Pages\Shared\static\**" />
     <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Pages\Shared\static\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Pages\Shared\static\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controller\BaseRequest\" />
-    <Folder Include="Pages\Shared\static\" />
   </ItemGroup>
 
   <ItemGroup>
