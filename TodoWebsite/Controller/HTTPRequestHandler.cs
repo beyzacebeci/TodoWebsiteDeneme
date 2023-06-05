@@ -8,6 +8,7 @@ namespace TodoWebsite.Controller
         public static T Get(IHttpContextAccessor accessor, string url)
         {
             string authCookie;
+            
             var cookieResult = accessor.HttpContext.Request.Cookies.TryGetValue(".AspNetCore.cookie", out authCookie);
 
             var client = new RestClient(url);

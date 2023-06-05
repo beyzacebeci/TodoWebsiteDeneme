@@ -2,9 +2,9 @@
 
 namespace TodoWebsite.Models.ResultModels
 {
-    public class DataResultModel
+    public class DataResultModel<T>
     {
-        public DataEntity data { get; set; }
+        public T data { get; set; }
         public bool success { get; set; }
         public string message { get; set; }
 

@@ -8,7 +8,7 @@ namespace TodoWebsite.Controller
         public ResultWithCookie Register(IHttpContextAccessor accessor, string Name, string Surname, string Username, string NewPassword)
         {
 
-            var result = HTTPRequestHandler<ResultWithCookie>.Post(accessor, "https://webtodoapi.azurewebsites.net/api/Auth/register", new
+            var result = HTTPRequestHandler<ResultWithCookie>.Post(accessor, "https://mongodbinfra20230605150723.azurewebsites.net/Auth/register", new
             {
 
                 name = Name,
@@ -22,7 +22,7 @@ namespace TodoWebsite.Controller
         public ResultWithCookie Login(IHttpContextAccessor accessor, string Username, string Password)
         {
 
-            var result = HTTPRequestHandler<ResultWithCookie>.Post(accessor, "https://webtodoapi.azurewebsites.net/api/Auth/login", new
+            var result = HTTPRequestHandler<ResultWithCookie>.Post(accessor, "https://mongodbinfra20230605150723.azurewebsites.net/Auth/login", new
             {
                 username = Username,
                 password = Password
