@@ -7,18 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controller\BaseRequest\**" />
     <Compile Remove="Pages\Shared\static\**" />
     <Compile Remove="Services\**" />
+    <Content Remove="Controller\BaseRequest\**" />
     <Content Remove="Pages\Shared\static\**" />
     <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Controller\BaseRequest\**" />
     <EmbeddedResource Remove="Pages\Shared\static\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Controller\BaseRequest\**" />
     <None Remove="Pages\Shared\static\**" />
     <None Remove="Services\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controller\BaseRequest\" />
   </ItemGroup>
 
   <ItemGroup>
