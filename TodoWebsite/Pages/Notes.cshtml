@@ -17,17 +17,20 @@
             {
 
                 <div class="notepad notepad-item">
-                    <form method="post">
-
+                 
                     <label id="@note.id" style="display: none">@note.id</label>
                     <input class="top" contenteditable="true" asp-for="Notes" value=@note.topic/>
                     @*<input class="paper" contenteditable="true" asp-for="Content" value=@note.content  > *@
                     <textarea class="paper">@note.content
                     </textarea>
-                    <button type="submit" class="saveNote">
+                    <button class="btn btn-success" type="submit" class="saveNote" style="width:100%">
                         Kaydet
                     </button>
-                    </form>
+
+                    <button class="btn btn-dark" type="submit" style="width:100%">
+                            Sil
+                     </button>
+                   
 
                 </div>
 
@@ -63,9 +66,13 @@
             <textarea class="paper" contenteditable="true" asp-for="Content"> 
             </textarea>
             
-            <button type="submit" class="saveNote" >
-                Kaydet
-            </button>
+               <button class="btn btn-success" type="submit" class="saveNote" style="width:100%">
+                        Kaydet
+                    </button>
+
+                    <button class="btn btn-dark" type="submit" style="width:100%">
+                            Sil
+                     </button>
             </form>
             
 

@@ -30,9 +30,14 @@ function addNote() {
                     <input class="top" contenteditable="true" asp-for="Notes"  />
                     <textarea class="paper">
                     </textarea>
-                    <button id=${noteContainer.childElementCount-1} type="submit" class="saveNote" onclick="noteSaveClick(this,true)">
+                    <button id=${noteContainer.childElementCount - 1} type="submit" class="saveNote btn btn-success" onclick="noteSaveClick(this,true)" style="width:100%">
                         Kaydet
                     </button>
+                        
+
+                    <button class="btn btn-dark" type="submit" style="width:100%">
+                            Sil
+                     </button>
                 </div >`
 
     var template = document.createElement('template');
