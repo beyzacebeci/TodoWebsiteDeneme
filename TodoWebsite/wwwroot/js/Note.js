@@ -18,7 +18,7 @@ async function sendPostRequest(url, body) {
     })
     var body2 = await response.json();
 
-    return body2?.data?.id;
+    return body2?.data;
 
 }
 async function sendPutRequest(url, body) {
@@ -43,7 +43,7 @@ async function sendPutRequest(url, body) {
     });
     var body2 = await response.json();
 
-    return body2?.data?.success;
+    return body2?.data;
 
 }
 async function sendDeleteRequest(url, body,query) {
@@ -109,18 +109,31 @@ async function noteSaveClick(event){
             const content = textarea?.value?.replace(/\s/g, '');
             if (topic && content) {
 
-                sendPutRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/updateNoteByUserId?",
-                    { id : label.id,topic, content })
+                var data=await sendPutRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/updateNoteByUserId?",
+                    { id: label.id, topic, content })
+                if (data) {
+                    label.id = data.id
+                    document.getElementById("alertMessage").innerHTML = "Update successful"
+                    document.getElementById("alertContent").style.display = "block"
+                    setTimeout(() => {
+                        document.getElementById("alertContent").style.display = "none"
+                    }, [2000])
+                }
             }
         } else {
             const topic = input?.value
             const content = textarea?.value?.replace(/\s/g, '');
             if (topic && content) {
 
-                var noteId=await sendPostRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/addNoteByUserId?",
+                var data=await sendPostRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/addNoteByUserId?",
                     { topic, content, "creationTime": "2023-06-06T00:54:00.684Z", "lastModifiedTime": "2023-06-06T00:54:00.684Z" })
-                if (noteId) {
-                    label.id = noteId
+                if (data) {
+                    label.id = data.id
+                    document.getElementById("alertMessage").innerHTML = "Creating successful"
+                    document.getElementById("alertContent").style.display = "block"
+                    setTimeout(() => {
+                        document.getElementById("alertContent").style.display = "none"
+                    }, [2000])
                 }
             }
     }
@@ -143,7 +156,7 @@ async function noteDeleteClick(eventnumber) {
                 contianer.style.display = "none"
                 setTimeout(() => {
                     document.getElementById("alertContent").style.display = "none"
-                }, [5000])
+                }, [2000])
             } else {
 
             document.getElementById("alertMessage").innerHTML = result.message??"Hata oluþtu"
