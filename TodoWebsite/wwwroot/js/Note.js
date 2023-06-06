@@ -41,14 +41,40 @@ async function sendPutRequest(url, body) {
     }).catch(err => {
         console.log(err)
     });
-    return response;
+    var body2 = await response.json();
+
+    return body2?.data?.success;
+
+}
+async function sendDeleteRequest(url, body,query) {
+    var userId = document.getElementById("userId");
+    query["id"] = userId.value
+    userId = userId.value
+
+
+    const response = await fetch(url + new URLSearchParams({ ...query }), {
+        method: "DELETE",
+        //mode: "cors", // no-cors, *cors, same-origin
+        //cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        //credentials: "include", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(body),
+    }).catch(err => {
+        console.log(err)
+    });
+    var body2 = await response.json();
+
+    return body2;
 
 }
 function addNote() {
     var noteContainer = document.getElementById("note-container");
     let lastChild = noteContainer.children[noteContainer.childElementCount - 1];
     let newElement=
-        `<div class="notepad notepad-item">
+        `<div id=${ (noteContainer.childElementCount - 1)*1000 } class="notepad notepad-item">
                     <label id="-1" style="display: none"></label>
                     <input class="top" contenteditable="true" asp-for="Notes"  />
                     <textarea class="paper">
@@ -58,7 +84,7 @@ function addNote() {
                     </button>
                         
 
-                    <button class="btn btn-dark" type="submit" style="width:100%">
+                  <button class="btn btn-dark" type="submit" style="width:100%" onclick="noteDeleteClick(${noteContainer.childElementCount - 1})" >
                             Sil
                      </button>
                 </div >`
@@ -97,7 +123,35 @@ async function noteSaveClick(event){
                     label.id = noteId
                 }
             }
+    }
+
+
+
+}
+async function noteDeleteClick(eventnumber) {
+    var noteContainer = document.getElementById("note-container");
+    const currentElement = noteContainer.children[eventnumber];
+    const label = currentElement.getElementsByTagName('label').item(0)
+        if (label?.id) {
+            var result = await sendDeleteRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/deleteNoteByUserId?", null, { noteid: label.id })
+            //location.reload();
+            if (result && result.success) {
+                document.getElementById("alertMessage").innerHTML = result.message
+                document.getElementById("alertContent").style.display = "block"
+                var contianer = document.getElementById((eventnumber * 1000).toString())
+
+                contianer.style.display = "none"
+                setTimeout(() => {
+                    document.getElementById("alertContent").style.display = "none"
+                }, [5000])
+            } else {
+
+            document.getElementById("alertMessage").innerHTML = result.message??"Hata oluþtu"
+            document.getElementById("alertContent").style.display = "block"
+            setTimeout(() => {
+                document.getElementById("alertContent").style.display = "none"
+            }, [5000])
+            }
+
         }
-
-
 }
