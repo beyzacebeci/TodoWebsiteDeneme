@@ -11,9 +11,17 @@
                 
                 <a href="#">Ad Soyad</a>
                 <a href="#">Username</a>
-				<a href="#">Logout</a>
+                <a onclick="logout()" href="/Login">Logout</a>
 
             </div>
         </div>
     </div>
 </div>
+<script>
+    function logout(){
+        var cookie= document.cookie;
+        console.log(cookie)
+        document.cookie = ".AspNetCore.cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        console.log("test")
+    }
+</script>
