@@ -11,5 +11,11 @@ namespace TodoWebsite.Controller
 
 
         }
+        public DataResultModel<string> GetUserID(IHttpContextAccessor accessor)
+        {
+            return HTTPRequestHandler<DataResultModel<string>>.Get(accessor, "https://mongodbinfra20230605150723.azurewebsites.net/Auth/resolve");
+
+
+        }
     }
 }

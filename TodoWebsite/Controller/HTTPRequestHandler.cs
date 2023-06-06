@@ -8,7 +8,7 @@ namespace TodoWebsite.Controller
         public static T Get(IHttpContextAccessor accessor, string url)
         {
             string authCookie;
-            
+
             var cookieResult = accessor.HttpContext.Request.Cookies.TryGetValue(".AspNetCore.cookie", out authCookie);
 
             var client = new RestClient(url);
@@ -20,10 +20,14 @@ namespace TodoWebsite.Controller
                 request.AddHeader("Cookie", ".AspNetCore.cookie=" + authCookie);
             }
             var response = client.Get(request);
+            T result = default(T);
+            if (response.Content != null)
+            {
+                var content = response.Content;
 
-            var content = response.Content;
+                result = JsonSerializer.Deserialize<T>(content);
+            }
 
-            T result = JsonSerializer.Deserialize<T>(content);
             return result;
         }
         public static T Post(IHttpContextAccessor accessor, string url, Object body)
