@@ -449,7 +449,9 @@ a[href*="#followme"]::before {
     width: 0px;
     background-color: transparent;
 }
-
+.displaynoneset {
+    display: none;
+}
 .notes-container {
     margin: 90px 0px 0px 0px;
     width: 100%;
@@ -515,4 +517,11 @@ a[href*="#followme"]::before {
 
 .open-card-description{
     padding-top:10vh;
+}
+#alertContent {
+    position: fixed;
+    width: 30%;
+    left: 60%;
+    top: 80%;
+    display: none
 }

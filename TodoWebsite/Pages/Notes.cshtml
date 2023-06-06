@@ -5,6 +5,7 @@
     var UserNotes = Model.UserNotes;
 }
 
+
 <input style="display: none" id="userId" value="@Model.UserId"/>
 
 <div class="notes-container">
@@ -28,10 +29,10 @@
                         Kaydet
                     </button>
 
-                    <button class="btn btn-dark" type="submit" style="width:100%">
-                            Sil
-                     </button>
-                   
+                    <button class="btn btn-dark" type="submit" style="width:100%" onclick="noteDeleteClick(@index)" >
+                        Sil
+                    </button>
+            
 
                 </div>
                 index++;
@@ -46,6 +47,8 @@
     </div>
 
 </div>
+
+
 @*onclick="noteSaveClick('@note.id')*@"
 @*<script >*@
 

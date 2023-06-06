@@ -14,15 +14,20 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    @Html.Partial("LayoutPartials/_header")
-    <main>
-        <section class="main-section">
-       
-            <div class="content-container">
-                @RenderBody()
-            </div>
-        </section>
-    </main>
+    <div id="alertContent">
+        <div class="alert alert-success">
+            <strong id="alertMessage">Success!</strong> 
+        </div>
+    </div>
+@Html.Partial("LayoutPartials/_header")
+<main>
+    <section class="main-section">
+
+        <div class="content-container">
+            @RenderBody()
+        </div>
+    </section>
+</main>
 
 
 </body>
