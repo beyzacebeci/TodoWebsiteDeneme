@@ -13,6 +13,7 @@
 
         @if (UserNotes != null)
         {
+            var index = 0;
             foreach (var note in UserNotes)
             {
 
@@ -23,7 +24,7 @@
                     @*<input class="paper" contenteditable="true" asp-for="Content" value=@note.content  > *@
                     <textarea class="paper">@note.content
                     </textarea>
-                    <button class="btn btn-success" type="submit" class="saveNote" style="width:100%">
+                    <button id="@index" class="btn btn-success" type="submit" class="saveNote" style="width:100%" onclick="noteSaveClick(this)">
                         Kaydet
                     </button>
 
@@ -33,7 +34,7 @@
                    
 
                 </div>
-
+                index++;
             }
         }
 
