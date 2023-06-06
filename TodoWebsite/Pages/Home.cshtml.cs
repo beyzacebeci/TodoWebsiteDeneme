@@ -13,6 +13,8 @@ namespace TodoWebsite.Pages.Shared
         [BindProperty]
         public DataResultModel<List<ListeEntity>> UserTodoresult { get; set; } = default;
         [BindProperty]
+        public string UserId { get; set; } = String.Empty;
+        [BindProperty]
         public string id { get; set; }
         public HomeModel(IHttpContextAccessor _httpContextAccessor)
         {
@@ -47,6 +49,8 @@ namespace TodoWebsite.Pages.Shared
 
 
                 this.UserTodoresult = listController.GetAllList(_httpContextAccessor);
+                var answer = listController.GetUserID(_httpContextAccessor);
+                this.UserId = answer.data.ToString();
 
             }
 
