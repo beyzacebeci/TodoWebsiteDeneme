@@ -5,9 +5,8 @@
     var dataResult = Model.UserTodoresult == null ? null : Model.UserTodoresult.data;
 }
 
-
 <div class="window-overlay" onclick="overlayOff(event)">    
-    <input style="display: none" id="userId" value="@Model.UserId"/>
+    <input type="hidden" id="userId" value="@Model.UserId"/>
     <div class="todo-open-card-wrapper">
         <div class="open-card-content">
             <div class="open-card-header">

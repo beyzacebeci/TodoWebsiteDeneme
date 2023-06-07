@@ -130,9 +130,9 @@ $(document).on('blur', '.open-card-header-text', function () {
     console.log(newText);
 });
 
-function putData() { 
+function putData() {
     var model = {
-        id: '1',
+        id: $('#userId').val(),
         liste: []
     }
 
@@ -164,7 +164,7 @@ function putData() {
     });
 
     model.liste = liste;
-
+    
     console.log(model);
 
     $.ajax({
