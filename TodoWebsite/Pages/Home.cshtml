@@ -6,12 +6,12 @@
 }
 
 
-<div class="window-overlay" onclick="overlayOff()">    
+<div class="window-overlay" onclick="overlayOff(event)">    
     <input style="display: none" id="userId" value="@Model.UserId"/>
     <div class="todo-open-card-wrapper">
         <div class="open-card-content">
             <div class="open-card-header">
-                <h2 class="open-card-header-text"><strong></strong></h2>
+                <h2 class="open-card-header-text" contenteditable="true"><strong></strong></h2>
             </div>
             <div class="open-card-description">
                 <div class="description-header">
@@ -27,7 +27,7 @@
 </div>
 <div class="list-main-container" ondragover="allowDrop(event)" ondrop="dropCard(event)">
     <div class="save-button-wrapper">
-        <button class="btn btn-success" type="submit" class="saveNote" style="width:100%" onclick="noteSaveClick(this)">
+        <button class="btn btn-success" type="submit" class="saveNote" style="width:100%">
             Kaydet
         </button>
     </div>
@@ -43,7 +43,7 @@
                     <div class="list-cards-wrapper" >
                         @foreach (var cardItem in listItem.todos)
                         {
-                            <div id=" @cardItem.id " class="list-card" draggable="true" ondragend="dropCardSelf(event,'@cardItem.id')" ondragstart="dragCard(event)">
+                            <div id="@cardItem.id" class="list-card" draggable="true" ondragend="dropCardSelf(event,'@cardItem.id')" ondragstart="dragCard(event)">
                                 @if (cardItem.isChecked)
                                 {
                                     <label class="checkbox-label">

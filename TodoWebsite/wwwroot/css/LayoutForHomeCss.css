@@ -569,3 +569,6 @@ a[href*="#followme"]::before {
     background-color:transparent;
 }
 
+.open-card-header-text:focus {
+    background-color: #22272b;
+}

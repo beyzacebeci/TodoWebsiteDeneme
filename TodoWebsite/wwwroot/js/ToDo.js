@@ -19,35 +19,36 @@ const randomId = function (length = 10) {
 
 function addList() {
     let listId = randomId();
-
     $('.list-add-wrapper').before(
-        '<div class="list-wrapper">' +
-        '<div class= "list-header"> ' +
-        '<h3 class="card-header-text" contenteditable="true"> <strong>Yeni Liste</strong></h3> ' +
-        '</div><div class= "list-cards-wrapper"  id="' + listId + '" > ' +
-        '</div>' +
-        '<div class= "add-card-composer" onclick="addCard(\'' + listId + '\')"> ' +
-        ' <i class="fa fa-plus"></i>  Kart Ekle' +
-        '</div>' +
+        '<div class="list-wrapper"  id="'+listId+'">' +
+            '<div class= "list-header">' +
+                '<h3 class="card-header-text" contenteditable="true"> <strong>Yeni Liste</strong></h3> ' +
+            '</div>' +
+            '<div class= "list-cards-wrapper"> ' +
+            '</div>' +
+            '<div class= "add-card-composer" onclick="addCard(\''+listId+'\')"> ' +
+            '<i class="fa fa-plus"></i>  Kart Ekle' +
+            '</div>' +
         '</div>');
 }
 
 function addCard(elementId) {
     let cardId = randomId();
     var newCard =
-        '<div id="' + cardId + '" class="list-card" draggable="true" ondragend="dropCardSelf(event,\'' + cardId + '\')" ondragstart="dragCard(event)">' +
+        '<div id="'+cardId+'" class="list-card" draggable="true" ondragend="dropCardSelf(event,\''+cardId+'\')" ondragstart="dragCard(event)">' +
             '<label class="checkbox-label">'+
                 '<input type = "checkbox" >' +
                     '<svg viewBox="0 0 64 64">' +
                         '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>' +
                     '</svg>' +
-        '</label>' +
-        '<div class="card-text-wrapper" onclick="overlayOn(\''+ cardId +'\')">' +
-                '<span class="card-text">' +
-                    'Yeni Kart' +
-                '</span>'+
-            '</div>' +
-            '<div class="card-edit-wrapper"><i class="fa fa-pencil"></i></div>';
+            '</label>' +
+            '<div class="card-text-wrapper" onclick="overlayOn(\''+cardId+'\')">' +
+                    '<span class="card-text">' +
+                        'Yeni Kart' +
+                    '</span>'+
+                '</div>' +
+            '<div class="card-edit-wrapper"><i class="fa fa-pencil"></i></div>' +
+            '<p class="card-description-text" style="display:none;"></p>';
 
     $("#" + elementId).find(".list-cards-wrapper").append(newCard);
 }
@@ -93,8 +94,10 @@ function overlayOn(elementId) {
     $(".window-overlay").css("display", "block");
 }
 
-function overlayOff() {
-    $(".window-overlay").css("display", "none");
+function overlayOff(event) {
+    if (!$(".window-overlay").find(event.target).length) {
+        $(".window-overlay").css("display", "none");
+    }
 }
 
 $(document).on("mouseenter", ".list-card", function () {
@@ -120,4 +123,9 @@ $(document).on('blur', '.edit-card-input', function () {
     var newText = $(this).val();
     var cardText = '<span class="card-text">' + newText + '</span>';
     $(this).replaceWith(cardText);
+});
+
+$(document).on('blur', '.open-card-header-text', function () {
+    var newText = $(this).text();
+    console.log(newText);
 });
