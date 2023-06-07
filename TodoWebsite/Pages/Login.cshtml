@@ -24,7 +24,8 @@
             <input class="form-control" id="form-password" asp-for="Password">
 
          </div>
-        <label>@Model.ErrorMessage</label>
+		<div class="text-center text-danger"><label>@Model.ErrorMessage</label></div>
+        
 
         <div class="text-center">
             <button class="btn btn-primary rounded-pill mt-3 mb-1" method="post" asp-page-handler="Login">Login</button>
