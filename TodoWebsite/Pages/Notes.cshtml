@@ -1,7 +1,7 @@
 ﻿@page
 @model TodoWebsite.Pages.NotesModel
 @{
-    Layout = "_LayoutForHome";
+    Layout = "Shared/_LayoutForHome";
     var UserNotes = Model.UserNotes;
 }
 
@@ -13,18 +13,21 @@
 
         @if (UserNotes != null)
         {
+            var index = 0;
             foreach (var note in UserNotes)
             {
-
-                <div id="@note.id" class="notepad notepad-item">
+                var tabId = (@index + 1) * 1000;
+                <div tabindex="1" id="@tabId" class="notepad notepad-item">
+                    <label id="@note.id" style="display: none"></label>
                     <div class="notepad-header">
-                        <input class="notepad-header-text" contenteditable="true" asp-for="Notes" value=@note.topic />
-                        <button class="note-close-button" type="submit" onclick="noteDeleteClick()">
+                        <input class="notepad-header-text" contenteditable="true" asp-for="Notes" value=@note.topic onblur="noteSaveClick(@index)" />
+                        <button id="@index" class="note-close-button" type="submit" onclick="noteDeleteClick(@index)">
                             <i class="fa fa-close"></i>
                         </button>
                     </div>
-                    <textarea class="paper">@note.content</textarea>
+                    <textarea class="paper" onblur="noteSaveClick(@index)">@note.content</textarea>
                 </div>
+                index++;
             }
         }
 
@@ -33,11 +36,7 @@
                 <i class="fa fa-plus"></i> Not Ekle
             </div>
         </div>
-        <div class="save-button-wrapper">
-            <button class="btn btn-success" type="submit" class="saveNote" style="width:100%" onclick="noteSaveClick(this)">
-                Kaydet
-            </button>
-        </div>
+
     </div>
 </div>
 

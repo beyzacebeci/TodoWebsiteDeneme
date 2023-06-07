@@ -7,28 +7,37 @@ namespace TodoWebsite.Controller
     {
         public static T Get(IHttpContextAccessor accessor, string url)
         {
-            string authCookie;
-
-            var cookieResult = accessor.HttpContext.Request.Cookies.TryGetValue(".AspNetCore.cookie", out authCookie);
-
-            var client = new RestClient(url);
-            var request = new RestRequest();
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("Content-Type", "application/json");
-            if (authCookie != null)
+            try
             {
-                request.AddHeader("Cookie", ".AspNetCore.cookie=" + authCookie);
+                string authCookie;
+
+                var cookieResult = accessor.HttpContext.Request.Cookies.TryGetValue(".AspNetCore.cookie", out authCookie);
+
+                var client = new RestClient(url);
+                var request = new RestRequest();
+                request.AddHeader("Accept", "application/json");
+                request.AddHeader("Content-Type", "application/json");
+                if (authCookie != null)
+                {
+                    request.AddHeader("Cookie", ".AspNetCore.cookie=" + authCookie);
+                }
+                var response = client.Get(request);
+                T result = default(T);
+
+                if (response.Content != null)
+                {
+                    var content = response.Content;
+
+                    result = JsonSerializer.Deserialize<T>(content);
+                }
+
+                return result;
             }
-            var response = client.Get(request);
-            T result = default(T);
-            if (response.Content != null)
+            catch (Exception e)
             {
-                var content = response.Content;
-
-                result = JsonSerializer.Deserialize<T>(content);
+                throw new Exception();
             }
 
-            return result;
         }
         public static T Post(IHttpContextAccessor accessor, string url, Object body)
         {

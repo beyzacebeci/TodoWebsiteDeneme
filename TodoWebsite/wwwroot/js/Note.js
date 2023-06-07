@@ -6,12 +6,15 @@ async function sendPostRequest(url, body) {
         id: userId,
     }), {
         method: "POST",
-        //mode: "cors", // no-cors, *cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
         //cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        //credentials: "include", // include, *same-origin, omit
+        credentials: "same-origin", // include, *same-origin, omit
         headers: {
             "Content-Type": "application/json",
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': "*",
+            'Access-Control-Allow-Methods': "*",
+           'Access-Control-Allow-Headers': "*",
             // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(body),
@@ -30,7 +33,7 @@ async function sendPutRequest(url, body) {
         id: userId,
     }), {
         method: "PUT",
-        //mode: "cors", // no-cors, *cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
         //cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         //credentials: "include", // include, *same-origin, omit
         headers: {
@@ -54,7 +57,7 @@ async function sendDeleteRequest(url, body,query) {
 
     const response = await fetch(url + new URLSearchParams({ ...query }), {
         method: "DELETE",
-        //mode: "cors", // no-cors, *cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
         //cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         //credentials: "include", // include, *same-origin, omit
         headers: {
@@ -74,20 +77,19 @@ function addNote() {
     var noteContainer = document.getElementById("note-container");
     let lastChild = noteContainer.children[noteContainer.childElementCount - 1];
     let newElement=
-        `<div id=${ (noteContainer.childElementCount - 1)*1000 } class="notepad notepad-item">
-                    <label id="-1" style="display: none"></label>
-                    <input class="top" contenteditable="true" asp-for="Notes"  />
-                    <textarea class="paper">
-                    </textarea>
-                    <button id=${noteContainer.childElementCount - 1} type="submit" class="saveNote btn btn-success" onclick="noteSaveClick(this)" style="width:100%">
-                        Kaydet
-                    </button>
-                        
 
-                  <button class="btn btn-dark" type="submit" style="width:100%" onclick="noteDeleteClick(${noteContainer.childElementCount - 1})" >
-                            Sil
-                     </button>
-                </div >`
+
+        `<div tabindex="1" id=${(noteContainer.childElementCount) * 1000} class="notepad notepad-item">
+                    <label id="-1" style="display: none"></label>
+                    <div class="notepad-header">
+                        <input class="notepad-header-text" contenteditable="true" asp-for="Notes" onblur="noteSaveClick(${noteContainer.childElementCount - 1})" />
+                        <button id="${noteContainer.childElementCount - 1}" class="note-close-button" type="submit" onclick="noteDeleteClick(${noteContainer.childElementCount - 1})">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                    <textarea class="paper" onblur="noteSaveClick(${noteContainer.childElementCount - 1})"></textarea>
+                </div>`
+
 
     var template = document.createElement('template');
     template.innerHTML = newElement;
@@ -96,23 +98,26 @@ function addNote() {
 
 }
 
-async function noteSaveClick(event){
-    var noteContainer = document.getElementById("note-container");
-        const id = event.id;
-        const currentElement = noteContainer.children[id];
-        const input = currentElement.getElementsByTagName('input').item(0);
-        const textarea = currentElement.getElementsByTagName('textarea').item(0);
+async function noteSaveClick(number) {
+    if (number != null) {
+        var noteContainer = document.getElementById("note-container");
+        /*const id = event.id;*/
+        const currentElement = noteContainer.children[number];
         const label = currentElement.getElementsByTagName('label').item(0);
-        if (label.id!="-1") {
-            console.log(label.value)
+        const textarea = currentElement.getElementsByTagName('textarea').item(0);
+        const headerDiv = currentElement.getElementsByTagName('div').item(0);
+        const input = headerDiv.getElementsByTagName('input').item(0);
+
+
+        if (label.id != "-1") {
             const topic = input?.value
-            const content = textarea?.value?.replace(/\s/g, '');
+            const content = textarea?.value
             if (topic && content) {
 
-                var data=await sendPutRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/updateNoteByUserId?",
+                var data = await sendPutRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/updateNoteByUserId?",
                     { id: label.id, topic, content })
                 if (data) {
-                    label.id = data.id
+                    //label.id = data.id
                     document.getElementById("alertMessage").innerHTML = "Update successful"
                     document.getElementById("alertContent").style.display = "block"
                     setTimeout(() => {
@@ -122,11 +127,11 @@ async function noteSaveClick(event){
             }
         } else {
             const topic = input?.value
-            const content = textarea?.value?.replace(/\s/g, '');
+            const content = textarea?.value;
             if (topic && content) {
 
-                var data=await sendPostRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/addNoteByUserId?",
-                    { topic, content, "creationTime": "2023-06-06T00:54:00.684Z", "lastModifiedTime": "2023-06-06T00:54:00.684Z" })
+                var data = await sendPostRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/addNoteByUserId?",
+                    { topic, content })
                 if (data) {
                     label.id = data.id
                     document.getElementById("alertMessage").innerHTML = "Creating successful"
@@ -136,11 +141,11 @@ async function noteSaveClick(event){
                     }, [2000])
                 }
             }
+        }
     }
-
-
-
 }
+
+
 async function noteDeleteClick(eventnumber) {
     var noteContainer = document.getElementById("note-container");
     const currentElement = noteContainer.children[eventnumber];
@@ -151,7 +156,7 @@ async function noteDeleteClick(eventnumber) {
             if (result && result.success) {
                 document.getElementById("alertMessage").innerHTML = result.message
                 document.getElementById("alertContent").style.display = "block"
-                var contianer = document.getElementById((eventnumber * 1000).toString())
+                var contianer = document.getElementById((eventnumber) * 1000)
 
                 contianer.style.display = "none"
                 setTimeout(() => {
@@ -168,3 +173,23 @@ async function noteDeleteClick(eventnumber) {
 
         }
 }
+
+
+async function test() {
+    console.log("tetiklendi")
+}
+
+//`<div id=${(noteContainer.childElementCount - 1) * 1000} class="notepad notepad-item">
+//                    <label id="-1" style="display: none"></label>
+//                    <input class="top" contenteditable="true" asp-for="Notes"  />
+//                    <textarea class="paper">
+//                    </textarea>
+//                    <button id=${noteContainer.childElementCount - 1} type="submit" class="saveNote btn btn-success" onclick="noteSaveClick(this)" style="width:100%">
+//                        Kaydet
+//                    </button>
+                        
+
+//                  <button class="btn btn-dark" type="submit" style="width:100%" onclick="noteDeleteClick(${noteContainer.childElementCount - 1})" >
+//                            Sil
+//                     </button>
+//                </div >`

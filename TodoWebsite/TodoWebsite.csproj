@@ -14,9 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Controller\BaseRequest\" />
     <Folder Include="NpmJs\" />
     <Folder Include="Pages\Shared\static\" />
@@ -29,6 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
