@@ -34,13 +34,22 @@ function addList() {
 
 function addCard(elementId) {
     let cardId = randomId();
-    var elementOfClicked = $('#' + elementId);
-    var newCard = '<div id="' + cardId + '" class="list-card" draggable="true" ondragend="dropCardSelf(event,\'' + cardId + '\')" onclick="overlayOn()" ondragstart="dragCard(event)">' +
-        '<a><label class="checkbox-label"><input type="checkbox"><svg viewBox="0 0 64 64">' +
-        '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>' +
-        '</svg></label><span class= "cardText" >' + (elementOfClicked.children().length + 1) + '. kart </span></a></div>';
-    elementOfClicked.append(newCard);
+    var newCard =
+        '<div id="' + cardId + '" class="list-card" draggable="true" ondragend="dropCardSelf(event,\'' + cardId + '\')" ondragstart="dragCard(event)">' +
+            '<label class="checkbox-label">'+
+                '<input type = "checkbox" >' +
+                    '<svg viewBox="0 0 64 64">' +
+                        '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>' +
+                    '</svg>' +
+        '</label>' +
+        '<div class="card-text-wrapper" onclick="overlayOn(\''+ cardId +'\')">' +
+                '<span class="card-text">' +
+                    'Yeni Kart' +
+                '</span>'+
+            '</div>' +
+            '<div class="card-edit-wrapper"><i class="fa fa-pencil"></i></div>';
 
+    $("#" + elementId).find(".list-cards-wrapper").append(newCard);
 }
 
 function allowDrop(event) {
@@ -76,9 +85,11 @@ function dropCardSelf(event, cardId) {
     $("#" + cardId).css("opacity", "1");
 }
 
-function overlayOn(cardTopic,cardDescription) {
-    $(".open-card-header-text").find("strong").text(cardTopic);
-    $(".open-card-description-text").text(cardDescription);
+function overlayOn(elementId) {
+    var cardTopicText = $("#" + elementId).find(".card-text").text();
+    var cardDescriptionText = $("#" + elementId).find(".card-description-text").text();
+    $(".open-card-header-text").find("strong").text(cardTopicText);
+    $(".open-card-description-text").text(cardDescriptionText);
     $(".window-overlay").css("display", "block");
 }
 
@@ -86,3 +97,27 @@ function overlayOff() {
     $(".window-overlay").css("display", "none");
 }
 
+$(document).on("mouseenter", ".list-card", function () {
+    $(this).find(".card-edit-wrapper").css("display", "block");
+});
+
+$(document).on("mouseleave", ".list-card", function () {
+    $(this).find(".card-edit-wrapper").css("display", "none");
+});
+
+
+$(document).on('click', '.card-edit-wrapper', function () {
+    var cardText = $(this).siblings('.card-text-wrapper').find('.card-text');
+    var currentText = cardText.text();
+    var inputField = '<input type="text" class="edit-card-input" value="'+ currentText + '">';
+    cardText.replaceWith(inputField);
+    const end = $('.edit-card-input').val().length;
+    $('.edit-card-input').get(0).setSelectionRange(end, end);
+    $('.edit-card-input').focus();
+});
+
+$(document).on('blur', '.edit-card-input', function () {
+    var newText = $(this).val();
+    var cardText = '<span class="card-text">' + newText + '</span>';
+    $(this).replaceWith(cardText);
+});

@@ -19,15 +19,14 @@
             <strong id="alertMessage">Success!</strong> 
         </div>
     </div>
-@Html.Partial("LayoutPartials/_header")
-<main>
-    <section class="main-section">
-
-        <div class="content-container">
-            @RenderBody()
-        </div>
-    </section>
-</main>
+    @Html.Partial("LayoutPartials/_header")
+    <main>
+        <section class="main-section">
+            <div class="content-container">
+                @RenderBody()
+            </div>
+        </section>
+    </main>
 
 
 </body>

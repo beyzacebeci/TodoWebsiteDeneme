@@ -11,31 +11,20 @@
 <div class="notes-container">
     <div id="note-container" class="notes-wrapper">
 
-
         @if (UserNotes != null)
         {
-            var index = 0;
             foreach (var note in UserNotes)
             {
 
-                <div class="notepad notepad-item">
-                 
-                    <label id="@note.id" style="display: none">@note.id</label>
-                    <input class="top" contenteditable="true" asp-for="Notes" value=@note.topic/>
-                    @*<input class="paper" contenteditable="true" asp-for="Content" value=@note.content  > *@
-                    <textarea class="paper">@note.content
-                    </textarea>
-                    <button id="@index" class="btn btn-success" type="submit" class="saveNote" style="width:100%" onclick="noteSaveClick(this)">
-                        Kaydet
-                    </button>
-
-                    <button class="btn btn-dark" type="submit" style="width:100%" onclick="noteDeleteClick(@index)" >
-                        Sil
-                    </button>
-            
-
+                <div id="@note.id" class="notepad notepad-item">
+                    <div class="notepad-header">
+                        <input class="notepad-header-text" contenteditable="true" asp-for="Notes" value=@note.topic />
+                        <button class="note-close-button" type="submit" onclick="noteDeleteClick()">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                    <textarea class="paper">@note.content</textarea>
                 </div>
-                index++;
             }
         }
 
@@ -44,8 +33,12 @@
                 <i class="fa fa-plus"></i> Not Ekle
             </div>
         </div>
+        <div class="save-button-wrapper">
+            <button class="btn btn-success" type="submit" class="saveNote" style="width:100%" onclick="noteSaveClick(this)">
+                Kaydet
+            </button>
+        </div>
     </div>
-
 </div>
 
 
