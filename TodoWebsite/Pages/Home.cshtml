@@ -16,9 +16,9 @@
             <div class="open-card-description">
                 <div class="description-header">
                     <h5>
-                        <strong>Açıklama</strong>
+                        <strong>Description</strong>
                     </h5>
-                    <button class="edit-card-description" type="submit" onclick="editCardDescription()">düzenle</button>
+                    <button class="edit-card-description" type="submit" onclick="editCardDescription()">edit</button>
                 </div>
                 <p class="open-card-description-text"></p>
                 <textarea class="description-edit-area" >  </textarea>
@@ -38,6 +38,7 @@
         {
             @foreach(var listItem in dataResult)
             {
+                listItem.listId= "e" + listItem.listId;
                 <div class="list-wrapper" id="@listItem.listId">
                     <div class="list-header">
                         <h3 class="card-header-text" contenteditable="true" onblur="putData()" >@listItem.listName</h3>
@@ -48,6 +49,7 @@
                     <div class="list-cards-wrapper" >
                         @foreach (var cardItem in listItem.todos)
                         {
+                            cardItem.id = "e" + cardItem.id;
                             <div id="@cardItem.id" class="list-card" draggable="true" ondragend="dropCardSelf(event,'@cardItem.id')" ondragstart="dragCard(event)">
                                 @if (cardItem.isChecked)
                                 {
@@ -80,13 +82,13 @@
                         }
                     </div>
                     <div class="add-card-composer" onclick="addCard('@listItem.listId')">
-                        <i class="fa fa-plus"></i>  Kart Ekle
+                        <i class="fa fa-plus"></i>  Add Card
                     </div>
                 </div>
             }
         }
         <div class="list-add-wrapper" onclick="addList()" >
-            <div class="list-add-composer"><i class="fa fa-plus"></i> Liste Ekle
+            <div class="list-add-composer"><i class="fa fa-plus"></i> Add List
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ function addList() {
     $('.list-add-wrapper').before(
         '<div class="list-wrapper"  id="' + listId + '">' +
         '<div class= "list-header">' +
-        '<h3 class="card-header-text" contenteditable="true"> <strong>Yeni Liste</strong></h3> ' +
+        '<h3 class="card-header-text" contenteditable="true">New List</h3> ' +
         '<button class="list-delete-button" type="submit" onclick="deleteElement(\'' + listId + '\')">' +
         '<i class="fa fa-close"></i>' +
         '</button> '+
@@ -30,7 +30,7 @@ function addList() {
         '<div class= "list-cards-wrapper"> ' +
         '</div>' +
         '<div class= "add-card-composer" onclick="addCard(\'' + listId + '\')"> ' +
-        '<i class="fa fa-plus"></i>  Kart Ekle' +
+        '<i class="fa fa-plus"></i>  Add Card' +
         '</div>' +
         '</div>');
 }
@@ -40,18 +40,22 @@ function addCard(elementId) {
     var newCard =
         '<div id="' + cardId + '" class="list-card" draggable="true" ondragend="dropCardSelf(event,\'' + cardId + '\')" ondragstart="dragCard(event)">' +
         '<label class="checkbox-label">' +
-        '<input class="checkbox-button" type="checkbox">' +
+        '<input class="checkbox-button" type="checkbox" onchange="putData()">' +
         '<svg viewBox="0 0 64 64">' +
         '<path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength = "575.0541381835938" class= "path" > </path>' +
         '</svg>' +
         '</label>' +
         '<div class="card-text-wrapper" onclick="overlayOn(\'' + cardId + '\')">' +
         '<span class="card-text">' +
-        'Yeni Kart' +
+        'New Card' +
         '</span>' +
         '</div>' +
         '<div class="card-edit-wrapper"><i class="fa fa-pencil"></i></div>' +
-        '<p class="card-description-text" style="display:none;"></p>';
+        '<button class="card-delete-button" type="submit" onclick="deleteElement(\''+cardId+'\')">'+
+        '<i class="fa fa-close" ></i>'+
+        '</button> '+
+        '<p class="card-description-text" style="display:none;"></p>' +
+        '</div>';
 
     $("#" + elementId).find(".list-cards-wrapper").append(newCard);
 }
@@ -78,9 +82,8 @@ function dropCard(event) {
 
     if (targetWrapper && targetWrapper.contains(event.target)) {
 
-        var targetElement = targetWrapper.querySelector(".list-cards-wrapper");
-        targetElement.appendChild(draggedElement);
-
+        event.target.closest(".list-card") == null ? targetWrapper.querySelector(".list-cards-wrapper").appendChild(draggedElement) : event.target.closest(".list-card").before(draggedElement);
+        putData();
     }
 }
 
@@ -122,6 +125,7 @@ $(document).on("mouseleave", ".list-card", function () {
 
 function deleteElement(elementId) {
     $("#" + elementId).remove();
+    putData();
 }
 
 $(document).on('click', '.card-edit-wrapper', function () {
@@ -153,7 +157,6 @@ function putData() {
     var liste = [];
     $('.list-wrapper').each(function () {
         var listItem = {
-            listId: $(this).attr('id'),
             listName: $(this).find(".card-header-text").text(),
             todos: []
         }
@@ -199,9 +202,9 @@ function editCardDescription() {
     var descriptionText = $(".open-card-description-text");
     var editArea = $(".description-edit-area");
 
-    if (editElement.text() == "düzenle") {
+    if (editElement.text() == "edit") {
 
-        editElement.text("kaydet");
+        editElement.text("save");
         editArea.val(descriptionText.text());
         descriptionText.css("display", "none");
         editArea.css("display", "block");
@@ -209,7 +212,7 @@ function editCardDescription() {
 
     } else {
 
-        editElement.text("düzenle");
+        editElement.text("edit");
         descriptionText.text(editArea.val());
         descriptionText.css("display", "block");
         editArea.css("display", "none");

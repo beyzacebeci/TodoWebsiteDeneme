@@ -109,7 +109,7 @@ function addNote() {
         `<div tabindex="1" id=${(noteContainer.childElementCount) * 1000} class="notepad notepad-item">
                     <label id="-1" style="display: none"></label>
                     <div class="notepad-header">
-                        <input class="notepad-header-text" contenteditable="true" asp-for="Notes" onblur="noteSaveClick(${noteContainer.childElementCount - 1})" />
+                        <input class="notepad-header-text" contenteditable="true" asp-for="Notes" onblur="noteSaveClick(${noteContainer.childElementCount - 1})"  value="New Note"/>
                         <button id="${noteContainer.childElementCount - 1}" class="note-close-button" type="submit" onclick="noteDeleteClick(${noteContainer.childElementCount})">
                             <i class="fa fa-close"></i>
                         </button>
