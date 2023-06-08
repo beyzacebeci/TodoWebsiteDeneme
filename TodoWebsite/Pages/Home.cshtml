@@ -7,6 +7,7 @@
 
 <div class="window-overlay" onclick="overlayOff(event)">    
     <input type="hidden" id="userId" value="@Model.UserId"/>
+    <input type="hidden" id="openCardId" value=""/>
     <div class="todo-open-card-wrapper">
         <div class="open-card-content">
             <div class="open-card-header">
@@ -17,15 +18,17 @@
                     <h5>
                         <strong>Açıklama</strong>
                     </h5>
+                    <button class="edit-card-description" type="submit" onclick="editCardDescription()">düzenle</button>
                 </div>
                 <p class="open-card-description-text"></p>
+                <textarea class="description-edit-area" >  </textarea>
 
             </div>
         </div>
     </div>
 </div>
 <div class="list-main-container" ondragover="allowDrop(event)" ondrop="dropCard(event)">
-    <div class="save-button-wrapper">
+    <div class="save-button-wrapper" style="display:none">
         <button class="btn btn-success saveToDo" type="submit" onclick="putData()" style="width:100%">
             Kaydet
         </button>
@@ -37,8 +40,8 @@
             {
                 <div class="list-wrapper" id="@listItem.listId">
                     <div class="list-header">
-                        <h3 class="card-header-text" contenteditable="true"><strong>@listItem.listName</strong></h3>
-                        <button class="list-delete-button" type="submit">
+                        <h3 class="card-header-text" contenteditable="true" onblur="putData()" >@listItem.listName</h3>
+                        <button class="list-delete-button" type="submit" onclick="deleteElement('@listItem.listId')">
                             <i class="fa fa-close"></i>
                         </button>
                     </div>
@@ -49,7 +52,7 @@
                                 @if (cardItem.isChecked)
                                 {
                                     <label class="checkbox-label">
-                                        <input class="checkbox-button" type="checkbox" checked>
+                                        <input class="checkbox-button" type="checkbox" checked onchange="putData()">
                                         <svg viewBox="0 0 64 64">
                                             <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"> </path>
                                         </svg>
@@ -58,7 +61,7 @@
                                 else
                                 {
                                     <label class="checkbox-label">
-                                        <input type="checkbox">
+                                        <input class="checkbox-button" type="checkbox" onchange="putData()">
                                         <svg viewBox="0 0 64 64">
                                             <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"> </path>
                                         </svg>
@@ -68,6 +71,9 @@
                                     <span class="card-text">@cardItem.topic</span>
                                 </div>
                                 <div class="card-edit-wrapper"><i class="fa fa-pencil"></i></div>
+                                <button class="card-delete-button" type="submit" onclick="deleteElement('@cardItem.id')">
+                                    <i class="fa fa-close"></i>
+                                </button>
                                 <p class="card-description-text" style="display:none;">@cardItem.description</p>
                                     
                             </div>

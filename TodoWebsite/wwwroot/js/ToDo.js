@@ -23,6 +23,9 @@ function addList() {
         '<div class="list-wrapper"  id="' + listId + '">' +
         '<div class= "list-header">' +
         '<h3 class="card-header-text" contenteditable="true"> <strong>Yeni Liste</strong></h3> ' +
+        '<button class="list-delete-button" type="submit" onclick="deleteElement(\'' + listId + '\')">' +
+        '<i class="fa fa-close"></i>' +
+        '</button> '+
         '</div>' +
         '<div class= "list-cards-wrapper"> ' +
         '</div>' +
@@ -91,28 +94,40 @@ function overlayOn(elementId) {
     var cardDescriptionText = $("#" + elementId).find(".card-description-text").text();
     $(".open-card-header-text").find("strong").text(cardTopicText);
     $(".open-card-description-text").text(cardDescriptionText);
+    $("#openCardId").val(elementId);
     $(".window-overlay").css("display", "block");
 }
 
 function overlayOff(event) {
     if (!$(".window-overlay").find(event.target).length) {
+        var elementId = $("#openCardId").val();
+        var cardHeader = $(".open-card-header-text").find("strong").text();
+        var cardDescription = $(".open-card-description-text").text();
+        $("#" + elementId).find(".card-text").text(cardHeader);
+        $("#" + elementId).find(".card-description-text").text(cardDescription);
         $(".window-overlay").css("display", "none");
+        putData();
     }
 }
 
 $(document).on("mouseenter", ".list-card", function () {
     $(this).find(".card-edit-wrapper").css("display", "block");
+    $(this).find(".card-delete-button").css("display", "block");
 });
 
 $(document).on("mouseleave", ".list-card", function () {
     $(this).find(".card-edit-wrapper").css("display", "none");
+    $(this).find(".card-delete-button").css("display", "none");
 });
 
+function deleteElement(elementId) {
+    $("#" + elementId).remove();
+}
 
 $(document).on('click', '.card-edit-wrapper', function () {
     var cardText = $(this).siblings('.card-text-wrapper').find('.card-text');
     var currentText = cardText.text();
-    var inputField = '<input type="text" class="edit-card-input" value="' + currentText + '">';
+    var inputField = '<input type="text" class="edit-card-input" value="' + currentText + '" onblur="putData()">';
     cardText.replaceWith(inputField);
     const end = $('.edit-card-input').val().length;
     $('.edit-card-input').get(0).setSelectionRange(end, end);
@@ -127,7 +142,6 @@ $(document).on('blur', '.edit-card-input', function () {
 
 $(document).on('blur', '.open-card-header-text', function () {
     var newText = $(this).text();
-    console.log(newText);
 });
 
 function putData() {
@@ -140,7 +154,7 @@ function putData() {
     $('.list-wrapper').each(function () {
         var listItem = {
             listId: $(this).attr('id'),
-            listName: $(this).find(".card-header-text").find("strong").text(),
+            listName: $(this).find(".card-header-text").text(),
             todos: []
         }
 
@@ -163,8 +177,6 @@ function putData() {
     });
 
     model.liste = liste;
-    
-    console.log(model);
 
     $.ajax({
         type: "PUT",
@@ -181,3 +193,31 @@ function putData() {
     });
 
 }
+
+function editCardDescription() {
+    var editElement = $(".edit-card-description");
+    var descriptionText = $(".open-card-description-text");
+    var editArea = $(".description-edit-area");
+
+    if (editElement.text() == "düzenle") {
+
+        editElement.text("kaydet");
+        editArea.val(descriptionText.text());
+        descriptionText.css("display", "none");
+        editArea.css("display", "block");
+
+
+    } else {
+
+        editElement.text("düzenle");
+        descriptionText.text(editArea.val());
+        descriptionText.css("display", "block");
+        editArea.css("display", "none");
+    }
+    
+   
+    
+}
+
+
+

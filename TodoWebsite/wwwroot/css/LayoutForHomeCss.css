@@ -304,6 +304,7 @@ a[href*="#followme"]::before {
 
 .card-header-text{
     width:100%;
+    font-weight:bold;
 }
 
 .list-delete-button{
@@ -318,6 +319,22 @@ a[href*="#followme"]::before {
 .list-delete-button:hover{
     color:lightseagreen;
 }
+
+.card-delete-button {
+    display:none;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    max-height: 30px;
+    color: white;
+    margin-top: -10px;
+    
+}
+
+.card-delete-button:hover {
+    color: lightseagreen;
+}
+
 
 .list-card {
     display: flex;
@@ -552,6 +569,7 @@ a[href*="#followme"]::before {
 
 .open-card-description{
     padding-top:10vh;
+    height:70vh;
 }
 #alertContent {
     position: fixed;
@@ -582,6 +600,10 @@ a[href*="#followme"]::before {
     cursor:pointer;
 }
 
+.card-edit-wrapper:hover {
+    color: lightseagreen;
+}
+
 .edit-card-input{
     width:100%;
     color:white;
@@ -591,4 +613,47 @@ a[href*="#followme"]::before {
 
 .open-card-header-text:focus {
     background-color: #22272b;
+}
+
+.description-header{
+    display:flex;
+    margin-bottom:20px;
+}
+.edit-card-description {
+    margin-left: 10%;
+    border: 2px solid #4caf50;
+    color: #4caf50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: solid 2px;
+    color: lightseagreen;
+    font-weight: bolder;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 100px;
+    height: 30px;
+}
+.edit-card-description:hover {
+    background-color: lightseagreen;
+    color:white;
+}
+
+.description-edit-area {
+    display:none;
+    width: 100%;
+    min-height: 150px;
+    border-radius: 10px;
+    background-color: #22272b;
+    border: solid 2px white;
+    color: white;
+    font-size:19px;
+    padding: 5px 15px 0px 15px;
+}
+
+
+.open-card-description-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height:50vh;
+    overflow:auto;
 }
