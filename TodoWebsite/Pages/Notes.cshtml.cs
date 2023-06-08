@@ -23,34 +23,42 @@ namespace TodoWebsite.Pages
             this.NoteController = noteController;
             _accessor = accessor;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            var result = NoteController.GetAllList(_accessor);
-            if (result.success)
+
+            bool check = true;
+
+            var CookieCheck = _accessor.HttpContext.Request.Cookies;
+            foreach (var cookie in CookieCheck.Keys)
             {
-                UserNotes = result.data;
+                if (cookie == ".AspNetCore.cookie")
+                {
+                    check = false;
+                    break;
+                }
             }
-            ListController listController = new ListController();
 
+            if (check)
+            {
+                return Redirect("/login");
+            }
+            else
+            {
+                var result = NoteController.GetAllList(_accessor);
+                if (result.success)
+                {
+                    UserNotes = result.data;
+                }
+                ListController listController = new ListController();
+                var answer = listController.GetUserID(_accessor);
+                this.UserId = answer.data.ToString();
+            }
 
-            var answer = listController.GetUserID(_accessor);
-            this.UserId = answer.data.ToString();
+            return null;
         }
 
         public void OnPost(object parameter)
         {
-            Console.WriteLine(parameter);
-            // Console.WriteLine("rere");
-            //// Console.WriteLine(Notes);
-
-            // if (!String.IsNullOrEmpty(Notes) && !String.IsNullOrEmpty(Content))
-            // {
-            //     Console.WriteLine(Notes);
-            //     Console.WriteLine(Content);
-
-            //     return;
-
-            // }
         }
     }
 }
