@@ -21,7 +21,7 @@
                     <label id="@note.id" style="display: none"></label>
                     <div class="notepad-header">
                         <input class="notepad-header-text" contenteditable="true" asp-for="Notes" value=@note.topic onblur="noteSaveClick(@index)" />
-                        <button id="@index" class="note-close-button" type="submit" onclick="noteDeleteClick(@index)">
+                        <button id="@index" class="note-close-button" type="submit" onclick="noteDeleteClick(@index+1)">
                             <i class="fa fa-close"></i>
                         </button>
                     </div>
