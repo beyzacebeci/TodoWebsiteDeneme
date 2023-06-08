@@ -148,7 +148,6 @@ function putData() {
         $(this).find('.list-card').each(function () {
             var cardElement = $(this);
             let card = {
-                id: cardElement.attr('id'),
                 topic: cardElement.find(".card-text").text(),
                 description: cardElement.find(".card-description-text").text(),
                 isChecked: cardElement.find(".checkbox-button").prop("checked"),

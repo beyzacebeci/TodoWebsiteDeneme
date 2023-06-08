@@ -38,6 +38,9 @@
                 <div class="list-wrapper" id="@listItem.listId">
                     <div class="list-header">
                         <h3 class="card-header-text" contenteditable="true"><strong>@listItem.listName</strong></h3>
+                        <button class="list-delete-button" type="submit">
+                            <i class="fa fa-close"></i>
+                        </button>
                     </div>
                     <div class="list-cards-wrapper" >
                         @foreach (var cardItem in listItem.todos)

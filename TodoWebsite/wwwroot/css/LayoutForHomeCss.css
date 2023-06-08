@@ -20,9 +20,9 @@
         display: block;
  }
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -297,7 +297,27 @@ a[href*="#followme"]::before {
     border: 0px;
 }
 
+.list-header{
+    display:flex;
+    width:100%;
+}
 
+.card-header-text{
+    width:100%;
+}
+
+.list-delete-button{
+    background-color:transparent;
+    border:none;
+    font-size:25px;
+    color:white;
+    margin-top:-5px;
+    float:right;
+}
+
+.list-delete-button:hover{
+    color:lightseagreen;
+}
 
 .list-card {
     display: flex;
