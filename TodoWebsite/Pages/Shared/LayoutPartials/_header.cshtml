@@ -8,10 +8,10 @@
             <div class="avatar">
                 <img class="ms-3" src="/avatar.svg" width="70" height="70">
             </div>
-            <div class="dropdown-content">
+            <div class="dropdown-content" >
                 
-                <a href="#">Ad Soyad</a>
-                <a href="#">Username</a>
+                <a id="usernamesurname" href="#">Ad Soyad</a>
+                <a id="username" href="#">Username</a>
                 <a onclick="logout()" href="/Login">Logout</a>
 
             </div>
@@ -19,10 +19,13 @@
     </div>
 </div>
 <script>
+  
     function logout(){
         var cookie= document.cookie;
         console.log(cookie)
         document.cookie = ".AspNetCore.cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-        console.log("test")
     }
+
+
 </script>
+

@@ -22,6 +22,33 @@ async function sendPostRequest(url, body) {
     var body2 = await response.json();
 
     return body2?.data;
+}
+async function sendGetRequest(url) {
+    var userId = document.getElementById("userId");
+    userId = userId.value
+
+    const response = await fetch(url + new URLSearchParams({
+        id: userId,
+    }), {
+        method: "Get",
+        mode: "cors", // no-cors, *cors, same-origin
+        //cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': "*",
+            'Access-Control-Allow-Methods': "*",
+            'Access-Control-Allow-Headers': "*",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+    var body2 = await response.json();
+    if (body2.success) {
+        return body2?.data;
+    } else {
+        return null;
+    }
 
 }
 async function sendPutRequest(url, body) {
@@ -174,22 +201,20 @@ async function noteDeleteClick(eventnumber) {
         }
 }
 
+async function onLoadFunc() {
+    var userId = document.getElementById("userId");
+    if (userId?.value) {
+        var response = await sendGetRequest("https://mongodbinfra20230605150723.azurewebsites.net/User/getUserInfo?")
+        if (response != null) {
+            var username = response?.username ? response.username : "username"
+            var usernamesurname = response?.name || response?.surname ? response?.name + " " +response?.surname: "name"
 
+            document.getElementById("usernamesurname").textContent = usernamesurname;
+            document.getElementById("username").textContent = username;
+        }
+     }
+}
 async function test() {
     console.log("tetiklendi")
 }
 
-//`<div id=${(noteContainer.childElementCount - 1) * 1000} class="notepad notepad-item">
-//                    <label id="-1" style="display: none"></label>
-//                    <input class="top" contenteditable="true" asp-for="Notes"  />
-//                    <textarea class="paper">
-//                    </textarea>
-//                    <button id=${noteContainer.childElementCount - 1} type="submit" class="saveNote btn btn-success" onclick="noteSaveClick(this)" style="width:100%">
-//                        Kaydet
-//                    </button>
-                        
-
-//                  <button class="btn btn-dark" type="submit" style="width:100%" onclick="noteDeleteClick(${noteContainer.childElementCount - 1})" >
-//                            Sil
-//                     </button>
-//                </div >`
