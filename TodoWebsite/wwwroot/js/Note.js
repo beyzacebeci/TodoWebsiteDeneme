@@ -83,7 +83,7 @@ function addNote() {
                     <label id="-1" style="display: none"></label>
                     <div class="notepad-header">
                         <input class="notepad-header-text" contenteditable="true" asp-for="Notes" onblur="noteSaveClick(${noteContainer.childElementCount - 1})" />
-                        <button id="${noteContainer.childElementCount - 1}" class="note-close-button" type="submit" onclick="noteDeleteClick(${noteContainer.childElementCount - 1})">
+                        <button id="${noteContainer.childElementCount - 1}" class="note-close-button" type="submit" onclick="noteDeleteClick(${noteContainer.childElementCount})">
                             <i class="fa fa-close"></i>
                         </button>
                     </div>
@@ -148,7 +148,7 @@ async function noteSaveClick(number) {
 
 async function noteDeleteClick(eventnumber) {
     var noteContainer = document.getElementById("note-container");
-    const currentElement = noteContainer.children[eventnumber];
+    const currentElement = noteContainer.children[eventnumber-1];
     const label = currentElement.getElementsByTagName('label').item(0)
         if (label?.id) {
             var result = await sendDeleteRequest("https://mongodbinfra20230605150723.azurewebsites.net/Note/deleteNoteByUserId?", null, { noteid: label.id })
